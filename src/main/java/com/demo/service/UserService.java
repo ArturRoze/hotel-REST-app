@@ -10,6 +10,8 @@ import java.util.List;
 @Service
 public interface UserService {
 
+    List<User> getAll();
+
     User create(UserDataRequest userDataRequest);
 
     List<Room> readAllBookingOfUser(Long id);

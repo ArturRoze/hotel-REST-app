@@ -9,9 +9,10 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     User getByLogin(String login);
 
-    User getById (Long id);
+    User getById(Long id);
 
-//    List<User> findAll (User user);
-//
+    @Override
+    Iterable<User> findAll();
+
 //    void deleteAllById(Long id);
 }

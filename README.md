@@ -23,10 +23,12 @@ Application has API, it allows you to work with the application using JSON
 "endDate": "2018.03.03"
 }\
 **2.5**\
-**`GET`** **`/user/booking/{userId}`** view user booking with userId.\
+**`GET`** **`/user/all`** return all users from database.\
 **2.6**\
-**`GET`** **`/user/booking/total_price/{userId}`** get the total price of the booking user with userId\
+**`GET`** **`/user/booking/{userId}`** view user booking with userId.\
 **2.7**\
+**`GET`** **`/user/booking/total_price/{userId}`** get the total price of the booking user with userId\
+**2.8**\
 **`POST`** **`/hotel/rooms/allBooking`** get all bookings for the hotel.\
 {
 "startDate": "2018.03.02",
@@ -38,6 +40,6 @@ Java 1.8\
 Apache Maven 3.3.9 or higher\
 Rest client(for example "Postman").
 
-**4. How to run**\
+**4. How to run**
 
 mvn spring-boot:run

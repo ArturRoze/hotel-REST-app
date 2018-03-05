@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -43,19 +42,31 @@ public class UserController {
         }
     }
 
+    @GetMapping("/all")
+    public List<User> getAllUsers() {
+        LOGGER.info("get all users");
+        List<User> allUsers = userService.getAll();
+        if (allUsers != null) {
+            return allUsers;
+        }
+        return null;
+    }
+
     @GetMapping("/booking/{id}")
     public List<Room> getBooking(@RequestParam("id") Long userId) {
         LOGGER.info("get booking rooms by user with id: {}", userId);
-        List<Room> bookingRooms = new ArrayList<>();
-
-
-        return bookingRooms;
+        if (userId != null) {
+            return userService.readAllBookingOfUser(userId);
+        }
+        return null;
     }
 
     @GetMapping("/booking/total_price/{id}")
     public Double getTotalPriceOfBookings(@RequestParam("id") Long userId) {
         LOGGER.info("get total price of booking room by user with id: {}", userId);
-
-        return userService.getTotalPriceOfBooking(userId);
+        if (userId != null) {
+            return userService.getTotalPriceOfBooking(userId);
+        }
+        return null;
     }
 }

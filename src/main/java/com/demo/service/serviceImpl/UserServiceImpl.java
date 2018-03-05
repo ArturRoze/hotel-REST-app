@@ -1,5 +1,6 @@
 package com.demo.service.serviceImpl;
 
+import com.demo.dao.RoomRepository;
 import com.demo.dao.UserRepository;
 import com.demo.domain.income.UserDataRequest;
 import com.demo.model.AdditionalOption;
@@ -21,9 +22,17 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+    private final RoomRepository roomRepository;
+
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, RoomRepository roomRepository) {
         this.userRepository = userRepository;
+        this.roomRepository = roomRepository;
+    }
+
+    @Override
+    public List<User> getAll() {
+         return (List<User>) userRepository.findAll();
     }
 
     @Override
@@ -43,10 +52,11 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public List<Room> readAllBookingOfUser(Long userId) {
         LOGGER.info("Room List of user with id: {}", userId);
-
-
-
-        return null;
+        List<Room> allRoomsByUserId = roomRepository.findAllByUserId(userId);
+        if (allRoomsByUserId == null){
+            LOGGER.info("user with id: {} is not exist", userId);
+        }
+        return allRoomsByUserId;
     }
 
     @Override
