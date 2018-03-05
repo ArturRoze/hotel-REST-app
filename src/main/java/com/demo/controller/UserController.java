@@ -30,7 +30,7 @@ public class UserController {
     @PostMapping("/create")
     public UserDataResponse createUser(@RequestBody UserDataRequest request) {
         LOGGER.info("Creating User : {}", request);
-        if (StringUtils.hasLength(request.getName()) && StringUtils.hasLength(request.getSurname())) {
+        if (StringUtils.hasLength(request.getName()) && StringUtils.hasLength(request.getSurname()) && StringUtils.hasLength(request.getLogin())) {
             User user = userService.create(request);
             UserDataResponse userDataResponse = new UserDataResponse();
             userDataResponse.setUserId(user.getId());

@@ -1,6 +1,6 @@
 1. **About**\
-Demo REST application for booking room in hotel by user.\
-Application has API, it allows you to work with the application using JSON\
+Demo REST application for management rooms in hotel by user.\
+Application has API, it allows you to work with the application using JSON
 2. **API:**\
 **2.1**\
 **`GET`** **`/rooms/all/{date}`** returns list of available rooms for specified dates.\
@@ -10,16 +10,17 @@ Application has API, it allows you to work with the application using JSON\
 **2.3**\
 **`POST`** **`/user/create`** with a user object as JSON creates a new user.\
 {
-"name":"name",
-"surname":"surname"
+"name": "name",
+"login: "login",
+"surname": "surname"
 }\
 **2.4**\
 **`POST`** **`/rooms/booking`** book the room for specified days.\
 {
 "userId": 1,
-"category":"name",
-"startDate":"2018.03.02",
-"endDate":"2018.03.03"
+"category": "name",
+"startDate": "2018.03.02",
+"endDate": "2018.03.03"
 }\
 **2.5**\
 **`GET`** **`/user/booking/{userId}`** view user booking with userId.\
@@ -28,11 +29,15 @@ Application has API, it allows you to work with the application using JSON\
 **2.7**\
 **`POST`** **`/hotel/rooms/allBooking`** get all bookings for the hotel.\
 {
-"startDate":"2018.03.02",
-"endDate":"2018.03.02"
+"startDate": "2018.03.02",
+"endDate": "2018.03.02"
 }
 
 **3. Requirements**\
-Java 8.
+Java 1.8\
+Apache Maven 3.3.9 or higher\
+Rest client(for example "Postman").
 
 **4. How to run**\
+
+mvn spring-boot:run

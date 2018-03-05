@@ -38,10 +38,10 @@ public class RoomController {
         return availableRoomsOnDate;
     }
 
-    @GetMapping("/category/{categoryName}")
+    @GetMapping("/category/{nameCategory}")
     public List<Room> getRoomsOfCategory(@RequestParam Category nameCategory) {
         LOGGER.info("get rooms with category: {}", nameCategory);
-        if (StringUtils.hasLength(nameCategory.name())) {  //    как перебрать категории их может быть только 3 это Enum
+        if (nameCategory != null) {
             return roomService.getRoomsOfCategory(nameCategory);
         }
         return null;
