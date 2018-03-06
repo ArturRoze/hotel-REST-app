@@ -3,6 +3,8 @@ package com.demo.service.serviceImpl;
 import com.demo.dao.RoomRepository;
 import com.demo.domain.Category;
 import com.demo.domain.income.BookRequest;
+import com.demo.domain.income.PeriodBookRequest;
+import com.demo.domain.outcome.BookResponse;
 import com.demo.model.Room;
 import com.demo.service.RoomService;
 import org.slf4j.Logger;
@@ -28,11 +30,15 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     @Transactional
-    public List<Room> getAllAvailableRoom(Timestamp date) {
-        LOGGER.info("get all available room on date: {}", date);
-
-
-        return null;
+    public List<Room> getAllAvailableRoom(PeriodBookRequest periodBookRequest) {
+        LOGGER.info("get all available room on date: {}", periodBookRequest);
+        Timestamp startDate = periodBookRequest.getStartDate();
+        Timestamp endDate = periodBookRequest.getEndDate();
+        List<Room> bookedRoomsOnPeriod = roomRepository.findAllByStartBookingDateAndEndBookingDate(startDate, endDate);
+        if (bookedRoomsOnPeriod != null){
+            LOGGER.info("rooms on period: {} have already booked", periodBookRequest);
+        }
+        return bookedRoomsOnPeriod;
     }
 
     @Override
@@ -40,7 +46,7 @@ public class RoomServiceImpl implements RoomService {
     public List<Room> getRoomsOfCategory(Category nameCategory) {
         LOGGER.info("get room of category: {}", nameCategory);
         List<Room> allRoomsByCategory = roomRepository.findAllByCategory(nameCategory);
-        if (allRoomsByCategory == null){
+        if (allRoomsByCategory == null) {
             LOGGER.info("room with category: {} is not exist", nameCategory);
         }
         return allRoomsByCategory;
@@ -48,8 +54,11 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     @Transactional
-    public void bookRoom(BookRequest bookRequest) {
+    public BookResponse bookRoom(BookRequest bookRequest) {
         LOGGER.info("user with id {} books room: {}", bookRequest.getUserId(), bookRequest);
 
+        //TODO
+
+        return new BookResponse(1L, "single", bookRequest.getStartDate(), bookRequest.getEndDate());
     }
 }
