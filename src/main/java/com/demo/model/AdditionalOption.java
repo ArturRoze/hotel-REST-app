@@ -15,15 +15,16 @@ public class AdditionalOption {
 
     private double price;
 
-    @Column(name = "room_id")
-    private Long roomId;
+    @Column(name = "booking_id")
+    private Long bookingId;
 
     public AdditionalOption() {
     }
 
-    public AdditionalOption(String name, double price) {
+    public AdditionalOption(String name, double price, Long bookingId) {
         this.name = name;
         this.price = price;
+        this.bookingId = bookingId;
     }
 
     public Long getId() {
@@ -50,6 +51,14 @@ public class AdditionalOption {
         this.price = price;
     }
 
+    public Long getBookingId() {
+        return bookingId;
+    }
+
+    public void setBookingId(Long bookingId) {
+        this.bookingId = bookingId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -57,13 +66,14 @@ public class AdditionalOption {
         AdditionalOption that = (AdditionalOption) o;
         return Double.compare(that.price, price) == 0 &&
                 Objects.equals(id, that.id) &&
-                Objects.equals(name, that.name);
+                Objects.equals(name, that.name) &&
+                Objects.equals(bookingId, that.bookingId);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, name, price);
+        return Objects.hash(id, name, price, bookingId);
     }
 
     @Override
@@ -72,6 +82,7 @@ public class AdditionalOption {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
+                ", bookingId=" + bookingId +
                 '}';
     }
 }

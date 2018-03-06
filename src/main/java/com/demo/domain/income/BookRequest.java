@@ -15,6 +15,8 @@ public class BookRequest {
 
     private Long userId;
 
+    private Long roomId;
+
     private String category;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")

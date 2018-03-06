@@ -59,33 +59,33 @@ public class UserServiceImpl implements UserService {
         return allRoomsByUserId;
     }
 
-    @Override
-    @Transactional
-    public Double getTotalPriceOfBooking(Long id) {
-
-        User user = userRepository.getById(id);
-        List<Room> rooms = user.getRooms();
-        Double priceBookingRooms = getPriceBookingRooms(rooms);
-        Double priceAdditionalOptions = getPriceAdditionalOptions(rooms);
-        return priceBookingRooms + priceAdditionalOptions;
-    }
-
-    private Double getPriceBookingRooms(List<Room> rooms) {
-        Double totalPriceRooms = 0.0;
-        for (Room room : rooms) {
-            totalPriceRooms += room.getPrice();
-        }
-        return totalPriceRooms;
-    }
-
-    private Double getPriceAdditionalOptions(List<Room> rooms) {
-        Double totalPriceOptions = 0.0;
-        for (Room room : rooms) {
-            List<AdditionalOption> additionalOptions = room.getAdditionalOptions();
-            for (AdditionalOption additionalOption : additionalOptions) {
-                totalPriceOptions += additionalOption.getPrice();
-            }
-        }
-        return totalPriceOptions;
-    }
+//    @Override
+//    @Transactional
+//    public Double getTotalPriceOfBooking(Long id) {
+//
+//        User user = userRepository.getById(id);
+//        List<Room> rooms = user.getRooms();
+//        Double priceBookingRooms = getPriceBookingRooms(rooms);
+//        Double priceAdditionalOptions = getPriceAdditionalOptions(rooms);
+//        return priceBookingRooms + priceAdditionalOptions;
+//    }
+//
+//    private Double getPriceBookingRooms(List<Room> rooms) {
+//        Double totalPriceRooms = 0.0;
+//        for (Room room : rooms) {
+//            totalPriceRooms += room.getPrice();
+//        }
+//        return totalPriceRooms;
+//    }
+//
+//    private Double getPriceAdditionalOptions(List<Room> rooms) {
+//        Double totalPriceOptions = 0.0;
+//        for (Room room : rooms) {
+//            List<AdditionalOption> additionalOptions = room.getAdditionalOptions();
+//            for (AdditionalOption additionalOption : additionalOptions) {
+//                totalPriceOptions += additionalOption.getPrice();
+//            }
+//        }
+//        return totalPriceOptions;
+//    }
 }

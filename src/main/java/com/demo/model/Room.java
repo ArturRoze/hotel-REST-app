@@ -21,29 +21,23 @@ public class Room {
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    private Timestamp startBookingDate;
-
-    private Timestamp endBookingDate;
-
     private Double price;
-
-    @Column(name = "user_id")
-    private Long userId;
 
     @Column(name = "hotel_id")
     private Long hotelId;
 
     @OneToMany
     @JoinColumn(name = "room_id")
-    private List<AdditionalOption> additionalOptions = new ArrayList<>();
+    private List<Booking> bookings = new ArrayList<>();
 
     public Room() {
     }
 
-    public Room(Integer number, Category category, Double price) {
+    public Room(Integer number, Category category, Double price, Long hotelId) {
         this.number = number;
         this.category = category;
         this.price = price;
+        this.hotelId = hotelId;
     }
 
     public Long getId() {
@@ -70,24 +64,12 @@ public class Room {
         this.category = category;
     }
 
-    public Timestamp getStartBookingDate() {
-        return startBookingDate;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setStartBookingDate(Timestamp startBookingDate) {
-        this.startBookingDate = startBookingDate;
-    }
-
-    public Timestamp getEndBookingDate() {
-        return endBookingDate;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public Long getHotelId() {
@@ -98,24 +80,12 @@ public class Room {
         this.hotelId = hotelId;
     }
 
-    public void setEndBookingDate(Timestamp endBookingDate) {
-        this.endBookingDate = endBookingDate;
+    public List<Booking> getBookings() {
+        return bookings;
     }
 
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public List<AdditionalOption> getAdditionalOptions() {
-        return additionalOptions;
-    }
-
-    public void setAdditionalOptions(List<AdditionalOption> additionalOptions) {
-        this.additionalOptions = additionalOptions;
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
     }
 
     @Override
@@ -126,18 +96,14 @@ public class Room {
         return Objects.equals(id, room.id) &&
                 Objects.equals(number, room.number) &&
                 category == room.category &&
-                Objects.equals(startBookingDate, room.startBookingDate) &&
-                Objects.equals(endBookingDate, room.endBookingDate) &&
                 Objects.equals(price, room.price) &&
-                Objects.equals(userId, room.userId) &&
-                Objects.equals(hotelId, room.hotelId) &&
-                Objects.equals(additionalOptions, room.additionalOptions);
+                Objects.equals(hotelId, room.hotelId);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, number, category, startBookingDate, endBookingDate, price, userId, hotelId, additionalOptions);
+        return Objects.hash(id, number, category, price, hotelId);
     }
 
     @Override
@@ -146,12 +112,8 @@ public class Room {
                 "id=" + id +
                 ", number=" + number +
                 ", category=" + category +
-                ", startBookingDate=" + startBookingDate +
-                ", endBookingDate=" + endBookingDate +
                 ", price=" + price +
-                ", userId=" + userId +
                 ", hotelId=" + hotelId +
-                ", additionalOptions=" + additionalOptions +
                 '}';
     }
 }

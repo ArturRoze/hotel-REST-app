@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -25,7 +26,7 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
+    // WORKs
     @PostMapping("/create")
     public UserDataResponse createUser(@RequestBody UserDataRequest request) {
         LOGGER.info("Creating User : {}", request);
@@ -52,8 +53,8 @@ public class UserController {
         return null;
     }
 
-    @GetMapping("/booking/{id}")
-    public List<Room> getBooking(@RequestParam("id") Long userId) {
+    @GetMapping("{id}/booking")
+    public List<Room> getBooking(@PathVariable("id") Long userId) {
         LOGGER.info("get booking rooms by user with id: {}", userId);
         if (userId != null) {
             return userService.readAllBookingOfUser(userId);
@@ -61,11 +62,11 @@ public class UserController {
         return null;
     }
 
-    @GetMapping("/booking/total_price/{id}")
-    public Double getTotalPriceOfBookings(@RequestParam("id") Long userId) {
+    @GetMapping("{id}/booking/total_price")
+    public Double getTotalPriceOfBookings(@PathVariable("id") Long userId) {
         LOGGER.info("get total price of booking room by user with id: {}", userId);
         if (userId != null) {
-            return userService.getTotalPriceOfBooking(userId);
+//            return userService.getTotalPriceOfBooking(userId);
         }
         return null;
     }

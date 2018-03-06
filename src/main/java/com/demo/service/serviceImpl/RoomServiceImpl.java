@@ -45,11 +45,8 @@ public class RoomServiceImpl implements RoomService {
     @Transactional
     public List<Room> getRoomsOfCategory(Category nameCategory) {
         LOGGER.info("get room of category: {}", nameCategory);
-        List<Room> allRoomsByCategory = roomRepository.findAllByCategory(nameCategory);
-        if (allRoomsByCategory == null) {
-            LOGGER.info("room with category: {} is not exist", nameCategory);
-        }
-        return allRoomsByCategory;
+        return roomRepository.findAllByCategory(nameCategory);
+
     }
 
     @Override

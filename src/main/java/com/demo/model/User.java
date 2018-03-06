@@ -21,7 +21,7 @@ public class User {
 
     @OneToMany
     @JoinColumn(name = "user_id")
-    private List<Room> rooms = new ArrayList<>();
+    private List<Booking> bookings = new ArrayList<>();
 
     public User() {
     }
@@ -64,12 +64,12 @@ public class User {
         this.surname = surname;
     }
 
-    public List<Room> getRooms() {
-        return rooms;
+    public List<Booking> getBookings() {
+        return bookings;
     }
 
-    public void setRooms(List<Room> rooms) {
-        this.rooms = rooms;
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
     }
 
     @Override
@@ -81,13 +81,13 @@ public class User {
                 Objects.equals(login, user.login) &&
                 Objects.equals(name, user.name) &&
                 Objects.equals(surname, user.surname) &&
-                Objects.equals(rooms, user.rooms);
+                Objects.equals(bookings, user.bookings);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, login, name, surname, rooms);
+        return Objects.hash(id, login, name, surname, bookings);
     }
 
     @Override
@@ -97,7 +97,7 @@ public class User {
                 ", login='" + login + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", rooms=" + rooms +
+                ", bookings=" + bookings +
                 '}';
     }
 }

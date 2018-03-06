@@ -16,5 +16,5 @@ public interface UserService {
 
     List<Room> readAllBookingOfUser(Long id);
 
-    Double getTotalPriceOfBooking(Long id);
+//    Double getTotalPriceOfBooking(Long id);
 }

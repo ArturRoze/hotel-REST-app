@@ -28,8 +28,8 @@ public class RoomController {
         this.roomService = roomService;
     }
 
-    @GetMapping("/all/{date}")
-    public List<Room> getAllAvailableRooms(@RequestParam("date") PeriodBookRequest periodBookRequest) {
+    @GetMapping("/all")
+    public List<Room> getAllAvailableRooms(@RequestParam PeriodBookRequest periodBookRequest) { //2 params startDate, EndDate
         LOGGER.info("get all available rooms on date: {}", periodBookRequest);
 
         //TODO
@@ -40,7 +40,7 @@ public class RoomController {
         return availableRoomsOnDate;
     }
 
-    @GetMapping("/category/{nameCategory}")
+    @GetMapping("/category")
     public List<Room> getRoomsOfCategory(@RequestParam Category nameCategory) {
         LOGGER.info("get rooms with category: {}", nameCategory);
         if (nameCategory != null) {
