@@ -32,10 +32,11 @@ public class HotelServiceImpl implements HotelService {
     @Transactional
     public List<Room> getAllBookingRoomsOfHotel(PeriodBookRequest period) {
         LOGGER.info("get all rooms of hotel on period: {}", period);
-        List<Room> allBookingRooms = roomRepository.findAllByStartBookingDateAndEndBookingDate(period.getStartDate(), period.getEndDate());
-        if (allBookingRooms == null){
-            LOGGER.info("There are no booked rooms");
-        }
-        return allBookingRooms;
+//        List<Room> allBookingRooms = roomRepository.findAllByStartBookingDateAndEndBookingDate(period.getStartDate(), period.getEndDate());
+////        if (allBookingRooms == null){
+////            LOGGER.info("There are no booked rooms");
+////        }
+////        return allBookingRooms;
+        return null;
     }
 }

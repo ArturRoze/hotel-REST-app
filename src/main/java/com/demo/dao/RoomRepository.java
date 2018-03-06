@@ -10,8 +10,8 @@ import java.util.List;
 public interface RoomRepository extends CrudRepository<Room, Long> {
 
     List<Room> findAllByCategory(Category category);
-
-    List<Room> findAllByStartBookingDateAndEndBookingDate(Timestamp startBookingDate, Timestamp endBookingDate);
-
-    List<Room> findAllByUserId(Long id);
+//
+//    List<Room> findAllByStartBookingDateAndEndBookingDate(Timestamp startBookingDate, Timestamp endBookingDate);
+//
+//    List<Room> findAllByUserId(Long id);
 }

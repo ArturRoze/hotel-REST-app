@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface BookingRepository extends CrudRepository<Booking, Long> {
 
-    List<Booking> findAllByUserId(Long id);
-
-    @Override
-    Iterable<Booking> findAll();
+//    List<Booking> findAllByUserId(Long id);
+//
+//    @Override
+//    Iterable<Booking> findAll();
 }

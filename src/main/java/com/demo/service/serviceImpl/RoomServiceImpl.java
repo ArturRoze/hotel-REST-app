@@ -32,13 +32,14 @@ public class RoomServiceImpl implements RoomService {
     @Transactional
     public List<Room> getAllAvailableRoom(PeriodBookRequest periodBookRequest) {
         LOGGER.info("get all available room on date: {}", periodBookRequest);
-        Timestamp startDate = periodBookRequest.getStartDate();
-        Timestamp endDate = periodBookRequest.getEndDate();
-        List<Room> bookedRoomsOnPeriod = roomRepository.findAllByStartBookingDateAndEndBookingDate(startDate, endDate);
-        if (bookedRoomsOnPeriod != null){
-            LOGGER.info("rooms on period: {} have already booked", periodBookRequest);
-        }
-        return bookedRoomsOnPeriod;
+//        Timestamp startDate = periodBookRequest.getStartDate();
+//        Timestamp endDate = periodBookRequest.getEndDate();
+//        List<Room> bookedRoomsOnPeriod = roomRepository.findAllByStartBookingDateAndEndBookingDate(startDate, endDate);
+//        if (bookedRoomsOnPeriod != null){
+//            LOGGER.info("rooms on period: {} have already booked", periodBookRequest);
+//        }
+//        return bookedRoomsOnPeriod;
+        return null;
     }
 
     @Override

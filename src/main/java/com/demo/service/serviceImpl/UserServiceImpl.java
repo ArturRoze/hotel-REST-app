@@ -51,12 +51,13 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public List<Room> readAllBookingOfUser(Long userId) {
-        LOGGER.info("Room List of user with id: {}", userId);
-        List<Room> allRoomsByUserId = roomRepository.findAllByUserId(userId);
-        if (allRoomsByUserId == null){
-            LOGGER.info("user with id: {} is not exist", userId);
-        }
-        return allRoomsByUserId;
+//        LOGGER.info("Room List of user with id: {}", userId);
+//        List<Room> allRoomsByUserId = roomRepository.findAllByUserId(userId);
+//        if (allRoomsByUserId == null){
+//            LOGGER.info("user with id: {} is not exist", userId);
+//        }
+//        return allRoomsByUserId;
+        return null;
     }
 
 //    @Override

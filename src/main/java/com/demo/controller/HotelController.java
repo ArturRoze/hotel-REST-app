@@ -18,21 +18,21 @@ import java.util.List;
 @RequestMapping("/hotel")
 public class HotelController {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(getClass());
-
-    private HotelService hotelService;
-
-    @Autowired
-    public HotelController(HotelService hotelService) {
-        this.hotelService = hotelService;
-    }
-
-    @PostMapping("/rooms/allBooking")
-    public List<Room> getAllBookingRoomsOfHotel(@RequestBody PeriodBookRequest request) {
-        LOGGER.info("get all booking rooms in hotel on date: {}", request);
-        if (StringUtils.hasLength(request.toString())) {
-            return hotelService.getAllBookingRoomsOfHotel(request);
-        }
-        return null;
-    }
+//    private final Logger LOGGER = LoggerFactory.getLogger(getClass());
+//
+//    private HotelService hotelService;
+//
+//    @Autowired
+//    public HotelController(HotelService hotelService) {
+//        this.hotelService = hotelService;
+//    }
+//
+//    @PostMapping("/rooms/allBooking")
+//    public List<Room> getAllBookingRoomsOfHotel(@RequestBody PeriodBookRequest request) {
+//        LOGGER.info("get all booking rooms in hotel on date: {}", request);
+//        if (StringUtils.hasLength(request.toString())) {
+//            return hotelService.getAllBookingRoomsOfHotel(request);
+//        }
+//        return null;
+//    }
 }
