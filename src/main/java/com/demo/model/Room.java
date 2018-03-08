@@ -26,8 +26,7 @@ public class Room {
     @Column(name = "hotel_id")
     private Long hotelId;
 
-    @OneToMany
-    @JoinColumn(name = "room_id")
+    @OneToMany(mappedBy = "roomId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Booking> bookings = new ArrayList<>();
 
     public Room() {

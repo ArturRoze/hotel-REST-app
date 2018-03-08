@@ -10,9 +10,7 @@ CREATE TABLE `additional_option` (
 
 INSERT INTO `additional_option` VALUES (1,'clean',10,1),(2,'wash',15,2),(3,'breakfast',20,3);
 
---
 -- Table structure for table `booking`
---
 
 DROP TABLE IF EXISTS `booking`;
 
@@ -20,12 +18,15 @@ CREATE TABLE `booking` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `start_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `end_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `user_id` bigint(20) NOT NULL,
   `room_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `total_price` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
-INSERT INTO `booking` VALUES (1,'2018-03-06','2018-03-06 13:22:39',1,1),(2,'2018-03-06 13:22:39','2018-03-06 13:22:39',2,2),(3,'2018-03-06 13:22:39','2018-03-06 13:22:39',3,3);
+INSERT INTO `booking` VALUES (1,'2018-03-05 10:00:00','2018-03-06 12:00:00',1,1,50),(2,'2018-03-06 10:00:00','2018-03-06 20:00:47',2,2,75),(3,'2018-03-07 10:00:00','2018-03-08 10:00:00',3,3,385),(4,'2018-03-07 13:45:48','2018-03-08 13:45:48',4,4,95), (5,'2018-03-07 13:45:48','2018-03-08 13:45:48',4,4,95), (6,'2018-03-07 13:45:48','2018-03-08 13:45:48',5,4,75);
+
+-- Table structure for table `hotel`
 
 DROP TABLE IF EXISTS `hotel`;
 
@@ -35,12 +36,9 @@ CREATE TABLE `hotel` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `hotel` VALUES (1,'Redisson'),(2, 'Cleopatra');
 
-INSERT INTO `hotel` VALUES (1,'Redisson');
-
---
 -- Table structure for table `room`
---
 
 DROP TABLE IF EXISTS `room`;
 
@@ -53,11 +51,9 @@ CREATE TABLE `room` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `room` VALUES (1,1,'SINGLE',50,1),(2,2,'DOUBLE',75,1),(3,3,'APARTMENT',120,1),(4,4,'SINGLE',50,1),(5,5,'DOUBLE',75,1);
+INSERT INTO `room` VALUES (1,1,'SINGLE',50,1),(2,2,'DOUBLE',75,1),(3,3,'APARTMENT',120,1),(4,4,'SINGLE',50,1),(5,5,'DOUBLE',75,2);
 
---
 -- Table structure for table `user`
---
 
 DROP TABLE IF EXISTS `user`;
 

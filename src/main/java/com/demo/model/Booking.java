@@ -14,6 +14,9 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "total_price")
+    private Long totalPrice;
+
     @Column(name = "start_date")
     private Timestamp startDate;
 
@@ -26,14 +29,14 @@ public class Booking {
     @Column(name = "room_id")
     private Long roomId;
 
-    @OneToMany
-    @JoinColumn(name = "booking_id")
+    @OneToMany(mappedBy = "bookingId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<AdditionalOption> additionalOptions = new ArrayList<>();
 
     public Booking() {
     }
 
-    public Booking(Timestamp startDate, Timestamp endDate, Long userId, Long roomId) {
+    public Booking(Long totalPrice, Timestamp startDate, Timestamp endDate, Long userId, Long roomId) {
+        this.totalPrice = totalPrice;
         this.startDate = startDate;
         this.endDate = endDate;
         this.userId = userId;
@@ -46,6 +49,14 @@ public class Booking {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Long totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public Timestamp getStartDate() {
@@ -94,6 +105,7 @@ public class Booking {
         if (o == null || getClass() != o.getClass()) return false;
         Booking booking = (Booking) o;
         return Objects.equals(id, booking.id) &&
+                Objects.equals(totalPrice, booking.totalPrice) &&
                 Objects.equals(startDate, booking.startDate) &&
                 Objects.equals(endDate, booking.endDate) &&
                 Objects.equals(userId, booking.userId) &&
@@ -104,13 +116,14 @@ public class Booking {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, startDate, endDate, userId, roomId, additionalOptions);
+        return Objects.hash(id, totalPrice, startDate, endDate, userId, roomId, additionalOptions);
     }
 
     @Override
     public String toString() {
         return "Booking{" +
                 "id=" + id +
+                ", totalPrice=" + totalPrice +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", userId=" + userId +

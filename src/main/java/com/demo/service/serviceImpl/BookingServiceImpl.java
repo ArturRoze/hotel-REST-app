@@ -18,9 +18,4 @@ public class BookingServiceImpl implements BookingService{
     public BookingServiceImpl(BookingRepository hotelRepository) {
         this.bookingRepository = hotelRepository;
     }
-
-
-
-
-
 }

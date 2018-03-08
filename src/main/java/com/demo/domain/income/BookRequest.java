@@ -17,20 +17,18 @@ public class BookRequest {
 
     private Long roomId;
 
-    private String category;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     private Timestamp startDate;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     private Timestamp endDate;
 
     public BookRequest() {
     }
 
-    public BookRequest(String category, Long userId, Timestamp startDate, Timestamp endDate) {
-        this.category = category;
+    public BookRequest(Long userId, Long roomId, Timestamp startDate, Timestamp endDate) {
         this.userId = userId;
+        this.roomId = roomId;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -43,12 +41,12 @@ public class BookRequest {
         this.userId = userId;
     }
 
-    public String getCategory() {
-        return category;
+    public Long getRoomId() {
+        return roomId;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setRoomId(Long roomId) {
+        this.roomId = roomId;
     }
 
     public Timestamp getStartDate() {
@@ -73,7 +71,7 @@ public class BookRequest {
         if (o == null || getClass() != o.getClass()) return false;
         BookRequest that = (BookRequest) o;
         return Objects.equals(userId, that.userId) &&
-                Objects.equals(category, that.category) &&
+                Objects.equals(roomId, that.roomId) &&
                 Objects.equals(startDate, that.startDate) &&
                 Objects.equals(endDate, that.endDate);
     }
@@ -81,14 +79,14 @@ public class BookRequest {
     @Override
     public int hashCode() {
 
-        return Objects.hash(userId, category, startDate, endDate);
+        return Objects.hash(userId, roomId, startDate, endDate);
     }
 
     @Override
     public String toString() {
         return "BookRequest{" +
                 "userId=" + userId +
-                ", category='" + category + '\'' +
+                ", roomId=" + roomId +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 '}';

@@ -1,9 +1,12 @@
 package com.demo.service.serviceImpl;
 
+import com.demo.dao.BookingRepository;
 import com.demo.dao.RoomRepository;
 import com.demo.dao.UserRepository;
+import com.demo.domain.income.BookRequest;
 import com.demo.domain.income.UserDataRequest;
 import com.demo.model.AdditionalOption;
+import com.demo.model.Booking;
 import com.demo.model.Room;
 import com.demo.model.User;
 import com.demo.service.UserService;
@@ -22,19 +25,24 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+    private final BookingRepository bookingRepository;
+
     private final RoomRepository roomRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoomRepository roomRepository) {
+    public UserServiceImpl(UserRepository userRepository, BookingRepository bookingRepository, RoomRepository roomRepository) {
         this.userRepository = userRepository;
+        this.bookingRepository = bookingRepository;
         this.roomRepository = roomRepository;
     }
 
+    //WORKs
     @Override
     public List<User> getAll() {
-         return (List<User>) userRepository.findAll();
+        return (List<User>) userRepository.findAll();
     }
 
+    //WORKs
     @Override
     @Transactional
     public User create(UserDataRequest userDataRequest) {
@@ -48,45 +56,34 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    //WORKs
     @Override
     @Transactional
-    public List<Room> readAllBookingOfUser(Long userId) {
-//        LOGGER.info("Room List of user with id: {}", userId);
-//        List<Room> allRoomsByUserId = roomRepository.findAllByUserId(userId);
-//        if (allRoomsByUserId == null){
-//            LOGGER.info("user with id: {} is not exist", userId);
-//        }
-//        return allRoomsByUserId;
-        return null;
+    public List<Booking> readAllBookingOfUser(Long userId) {
+        LOGGER.info("Booking list of user with id: {}", userId);
+        List<Booking> allBookingsByUserId = bookingRepository.findAllByUserId(userId);
+        if (allBookingsByUserId == null) {
+            LOGGER.info("user with id: {} is not exist", userId);
+        }
+        return allBookingsByUserId;
     }
 
-//    @Override
-//    @Transactional
-//    public Double getTotalPriceOfBooking(Long id) {
-//
-//        User user = userRepository.getById(id);
-//        List<Room> rooms = user.getRooms();
-//        Double priceBookingRooms = getPriceBookingRooms(rooms);
-//        Double priceAdditionalOptions = getPriceAdditionalOptions(rooms);
-//        return priceBookingRooms + priceAdditionalOptions;
-//    }
-//
-//    private Double getPriceBookingRooms(List<Room> rooms) {
-//        Double totalPriceRooms = 0.0;
-//        for (Room room : rooms) {
-//            totalPriceRooms += room.getPrice();
-//        }
-//        return totalPriceRooms;
-//    }
-//
-//    private Double getPriceAdditionalOptions(List<Room> rooms) {
-//        Double totalPriceOptions = 0.0;
-//        for (Room room : rooms) {
-//            List<AdditionalOption> additionalOptions = room.getAdditionalOptions();
-//            for (AdditionalOption additionalOption : additionalOptions) {
-//                totalPriceOptions += additionalOption.getPrice();
-//            }
-//        }
-//        return totalPriceOptions;
-//    }
+    //WORKs
+    @Override
+    @Transactional
+    public Double getTotalPriceOfBookings(Long id) {
+        List<Booking> allBookingsByUserId = bookingRepository.findAllByUserId(id);
+        Double totalPriceBookingsByUserId = 0.0;
+        for (Booking booking : allBookingsByUserId) {
+            totalPriceBookingsByUserId += booking.getTotalPrice();
+        }
+        return totalPriceBookingsByUserId;
+    }
+
+    //WORKs
+    @Override
+    @Transactional
+    public Double getTotalPriceOfBooking(Long userId, Long bookingId) {
+        return bookingRepository.getTotalPriceBookingByUserId(userId, bookingId);
+    }
 }

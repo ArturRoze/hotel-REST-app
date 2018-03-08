@@ -15,20 +15,23 @@ public class BookResponse {
 
     private Long userId;
 
-    private String category;
+    private Long roomId;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Long totalPrice;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     private Timestamp startDate;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     private Timestamp endDate;
 
     public BookResponse() {
     }
 
-    public BookResponse(Long userId, String category, Timestamp startDate, Timestamp endDate) {
+    public BookResponse(Long userId, Long roomId, Long totalPrice, Timestamp startDate, Timestamp endDate) {
         this.userId = userId;
-        this.category = category;
+        this.roomId = roomId;
+        this.totalPrice = totalPrice;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -41,12 +44,20 @@ public class BookResponse {
         this.userId = userId;
     }
 
-    public String getCategory() {
-        return category;
+    public Long getRoomId() {
+        return roomId;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setRoomId(Long roomId) {
+        this.roomId = roomId;
+    }
+
+    public Long getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Long totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public Timestamp getStartDate() {
@@ -71,7 +82,8 @@ public class BookResponse {
         if (o == null || getClass() != o.getClass()) return false;
         BookResponse that = (BookResponse) o;
         return Objects.equals(userId, that.userId) &&
-                Objects.equals(category, that.category) &&
+                Objects.equals(roomId, that.roomId) &&
+                Objects.equals(totalPrice, that.totalPrice) &&
                 Objects.equals(startDate, that.startDate) &&
                 Objects.equals(endDate, that.endDate);
     }
@@ -79,14 +91,15 @@ public class BookResponse {
     @Override
     public int hashCode() {
 
-        return Objects.hash(userId, category, startDate, endDate);
+        return Objects.hash(userId, roomId, totalPrice, startDate, endDate);
     }
 
     @Override
     public String toString() {
         return "BookResponse{" +
                 "userId=" + userId +
-                ", category='" + category + '\'' +
+                ", roomId=" + roomId +
+                ", totalPrice=" + totalPrice +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 '}';

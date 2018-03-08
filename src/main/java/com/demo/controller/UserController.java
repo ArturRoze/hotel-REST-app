@@ -2,7 +2,7 @@ package com.demo.controller;
 
 import com.demo.domain.income.UserDataRequest;
 import com.demo.domain.outcome.UserDataResponse;
-import com.demo.model.Room;
+import com.demo.model.Booking;
 import com.demo.model.User;
 import com.demo.service.UserService;
 import org.slf4j.Logger;
@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -26,6 +25,7 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
     // WORKs
     @PostMapping("/create")
     public UserDataResponse createUser(@RequestBody UserDataRequest request) {
@@ -43,6 +43,7 @@ public class UserController {
         }
     }
 
+    //WORKs
     @GetMapping("/all")
     public List<User> getAllUsers() {
         LOGGER.info("get all users");
@@ -53,20 +54,32 @@ public class UserController {
         return null;
     }
 
-    @GetMapping("{id}/booking")
-    public List<Room> getBooking(@PathVariable("id") Long userId) {
-        LOGGER.info("get booking rooms by user with id: {}", userId);
+    //WORKs
+    @GetMapping("{userId}/booking")
+    public List<Booking> getBooking(@PathVariable Long userId) {
+        LOGGER.info("get booking by user with id: {}", userId);
         if (userId != null) {
             return userService.readAllBookingOfUser(userId);
         }
         return null;
     }
 
-    @GetMapping("{id}/booking/total_price")
-    public Double getTotalPriceOfBookings(@PathVariable("id") Long userId) {
-        LOGGER.info("get total price of booking room by user with id: {}", userId);
+    //WORKs
+    @GetMapping("{userId}/bookings/total_price")
+    public Double getTotalPriceOfBookings(@PathVariable Long userId) {
+        LOGGER.info("get total price of bookings by user with id: {}", userId);
         if (userId != null) {
-//            return userService.getTotalPriceOfBooking(userId);
+            return userService.getTotalPriceOfBookings(userId);
+        }
+        return null;
+    }
+
+    //WORKs
+    @GetMapping("{userId}/booking/{bookingId}/total_price")
+    public Double getTotalPriceOfBookings(@PathVariable Long userId, @PathVariable Long bookingId) {
+        LOGGER.info("get total price of booking by user with id: {} and booking id: {}", userId, bookingId);
+        if (userId != null && bookingId != null) {
+            return userService.getTotalPriceOfBooking(userId, bookingId);
         }
         return null;
     }
