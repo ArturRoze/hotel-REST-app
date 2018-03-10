@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 /**
- * Specifies methods used to obtain and modify AdditionalOption related information
+ * Specifies methods used to obtain and modify {@link AdditionalOption} related information
  * which is stored in the database.
  *
  * @author Artur

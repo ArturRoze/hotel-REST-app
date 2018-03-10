@@ -15,6 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Service for managing {@link User} in repository
+ *
+ * @author Artur
+ * @see UserService
+ */
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -33,13 +39,21 @@ public class UserServiceImpl implements UserService {
         this.roomRepository = roomRepository;
     }
 
-    //WORKs
+    /**
+     * Method reads users from repository
+     *
+     * @return list of {@link User} from repository
+     */
     @Override
     public List<User> getAll() {
         return (List<User>) userRepository.findAll();
     }
 
-    //WORKs
+    /**
+     * Method saves {@link User} to repository
+     *
+     * @param userDataRequest {@link UserDataRequest} to save
+     */
     @Override
     @Transactional
     public User create(UserDataRequest userDataRequest) {
@@ -53,7 +67,12 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    //WORKs
+    /**
+     * Method collects all booking from repositories
+     *
+     * @param userId
+     * @return list of all {@link Booking} from repositories by id user
+     */
     @Override
     @Transactional
     public List<Booking> readAllBookingOfUser(Long userId) {
@@ -65,11 +84,16 @@ public class UserServiceImpl implements UserService {
         return allBookingsByUserId;
     }
 
-    //WORKs
+    /**
+     * Method get total price of booking for specific user
+     *
+     * @param userId id of user
+     * @return total price of bookings for specific user
+     */
     @Override
     @Transactional
-    public Double getTotalPriceOfBookings(Long id) {
-        List<Booking> allBookingsByUserId = bookingRepository.findAllByUserId(id);
+    public Double getTotalPriceOfBookings(Long userId) {
+        List<Booking> allBookingsByUserId = bookingRepository.findAllByUserId(userId);
         Double totalPriceBookingsByUserId = 0.0;
         for (Booking booking : allBookingsByUserId) {
             totalPriceBookingsByUserId += booking.getTotalPrice();
@@ -77,10 +101,16 @@ public class UserServiceImpl implements UserService {
         return totalPriceBookingsByUserId;
     }
 
-    //WORKs
+    /**
+     * Method get total price of booking for specific user
+     *
+     * @param userId id of user
+     * @param bookingId id of booking
+     * @return total price of booking for user
+     */
     @Override
     @Transactional
-    public Double getTotalPriceOfBooking(Long userId, Long bookingId) {
+    public Double getTotalPriceBookingByUserId(Long userId, Long bookingId) {
         return bookingRepository.getTotalPriceBookingByUserId(userId, bookingId);
     }
 }

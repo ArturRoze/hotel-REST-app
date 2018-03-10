@@ -1,13 +1,10 @@
 package com.demo.domain.income;
 
-import com.demo.domain.Category;
 import com.demo.model.AdditionalOption;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
@@ -20,8 +17,7 @@ public class BookRequest {
 
     private Long userId;
 
-    @Enumerated(EnumType.STRING)
-    private Category category;
+    private Long roomId;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     private Timestamp startDate;
@@ -34,9 +30,9 @@ public class BookRequest {
     public BookRequest() {
     }
 
-    public BookRequest(Long userId, Category category, Timestamp startDate, Timestamp endDate) {
+    public BookRequest(Long userId, Long roomId, Timestamp startDate, Timestamp endDate) {
         this.userId = userId;
-        this.category = category;
+        this.roomId = roomId;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -49,12 +45,12 @@ public class BookRequest {
         this.userId = userId;
     }
 
-    public Category getCategory() {
-        return category;
+    public Long getRoomId() {
+        return roomId;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setRoomId(Long roomId) {
+        this.roomId = roomId;
     }
 
     public Timestamp getStartDate() {
@@ -87,7 +83,7 @@ public class BookRequest {
         if (o == null || getClass() != o.getClass()) return false;
         BookRequest that = (BookRequest) o;
         return Objects.equals(userId, that.userId) &&
-                category == that.category &&
+                Objects.equals(roomId, that.roomId) &&
                 Objects.equals(startDate, that.startDate) &&
                 Objects.equals(endDate, that.endDate) &&
                 Objects.equals(additionalOptions, that.additionalOptions);
@@ -96,14 +92,14 @@ public class BookRequest {
     @Override
     public int hashCode() {
 
-        return Objects.hash(userId, category, startDate, endDate, additionalOptions);
+        return Objects.hash(userId, roomId, startDate, endDate, additionalOptions);
     }
 
     @Override
     public String toString() {
         return "BookRequest{" +
                 "userId=" + userId +
-                ", category=" + category +
+                ", roomId=" + roomId +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", additionalOptions=" + additionalOptions +

@@ -2,6 +2,7 @@ package com.demo.service.serviceImpl;
 
 import com.demo.dao.BookingRepository;
 import com.demo.model.Booking;
+import com.demo.model.Hotel;
 import com.demo.service.HotelService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service for managing {@link Hotel} in repository
+ *
+ * @author Artur
+ * @see HotelService
+ */
 @Service
 public class HotelServiceImpl implements HotelService {
 

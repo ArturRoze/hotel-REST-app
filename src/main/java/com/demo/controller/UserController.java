@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller for {@link User}
+ *
+ * @author Artyr
+ */
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -76,10 +81,10 @@ public class UserController {
 
     //WORKs
     @GetMapping("{userId}/booking/{bookingId}/total_price")
-    public Double getTotalPriceOfBookings(@PathVariable Long userId, @PathVariable Long bookingId) {
+    public Double getTotalPriceBookingByUserId(@PathVariable Long userId, @PathVariable Long bookingId) {
         LOGGER.info("get total price of booking by user with id: {} and booking id: {}", userId, bookingId);
         if (userId != null && bookingId != null) {
-            return userService.getTotalPriceOfBooking(userId, bookingId);
+            return userService.getTotalPriceBookingByUserId(userId, bookingId);
         }
         return null;
     }

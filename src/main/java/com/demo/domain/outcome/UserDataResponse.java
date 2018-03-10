@@ -11,7 +11,6 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDataResponse {
 
-
     private Long userId;
 
     private String login;

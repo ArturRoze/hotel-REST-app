@@ -19,10 +19,10 @@ Application has API, it allows you to work with the application using JSON
     "surname": "surname"
 }\
 **2.4**\
-**`POST`** **`/rooms/book`** book the room for specified days. Available values for test: name = (clean, wash, breakfast); category = (SINGLE, DOUBLE, APARTMENT)\
+**`POST`** **`/rooms/book`** book the room for specified days. Available values for test: name = (clean, wash, breakfast);\
 {
 	"userId": 1,
-	"category": "SINGLE",
+	"roomId": 4,
 	"startDate": "yyyy-MM-dd hh:mm:ss",
 	"endDate": "yyyy-MM-dd hh:mm:ss",
 	"additionalOptions": [{
@@ -32,8 +32,10 @@ Application has API, it allows you to work with the application using JSON
 **response:**\
 {
     "userId": 1,
-    "roomId": ?,
-    "category": "name",
+    "roomId": 4,
+    "bookingId": 2,
+    "totalPrice": 300.0,
+    "category": "SINGLE",
     "startDate": "yyyy-MM-dd hh:mm:ss",
     "endDate": "yyyy-MM-dd hh:mm:ss",
     "additionalOptions": [{

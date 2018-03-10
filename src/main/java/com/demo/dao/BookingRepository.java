@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 /**
- * Specifies methods used to obtain and modify booking related information
+ * Specifies methods used to obtain and modify {@link Booking} related information
  * which is stored in the database.
  *
  * @author Artur

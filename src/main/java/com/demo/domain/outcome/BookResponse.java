@@ -22,10 +22,12 @@ public class BookResponse {
 
     private Long roomId;
 
-    @Enumerated(EnumType.STRING)
-    private Category category;
+    private Long bookingId;
 
     private Double totalPrice;
+
+    @Enumerated(EnumType.STRING)
+    private Category category;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     private Timestamp startDate;
@@ -38,11 +40,12 @@ public class BookResponse {
     public BookResponse() {
     }
 
-    public BookResponse(Long userId, Long roomId, Category category, Double totalPrice, Timestamp startDate, Timestamp endDate) {
+    public BookResponse(Long userId, Long roomId, Long bookingId, Double totalPrice, Category category, Timestamp startDate, Timestamp endDate) {
         this.userId = userId;
         this.roomId = roomId;
-        this.category = category;
+        this.bookingId = bookingId;
         this.totalPrice = totalPrice;
+        this.category = category;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -63,12 +66,12 @@ public class BookResponse {
         this.roomId = roomId;
     }
 
-    public Category getCategory() {
-        return category;
+    public Long getBookingId() {
+        return bookingId;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setBookingId(Long bookingId) {
+        this.bookingId = bookingId;
     }
 
     public Double getTotalPrice() {
@@ -77,6 +80,14 @@ public class BookResponse {
 
     public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public Timestamp getStartDate() {
@@ -110,8 +121,9 @@ public class BookResponse {
         BookResponse that = (BookResponse) o;
         return Objects.equals(userId, that.userId) &&
                 Objects.equals(roomId, that.roomId) &&
-                category == that.category &&
+                Objects.equals(bookingId, that.bookingId) &&
                 Objects.equals(totalPrice, that.totalPrice) &&
+                category == that.category &&
                 Objects.equals(startDate, that.startDate) &&
                 Objects.equals(endDate, that.endDate) &&
                 Objects.equals(additionalOptions, that.additionalOptions);
@@ -120,7 +132,7 @@ public class BookResponse {
     @Override
     public int hashCode() {
 
-        return Objects.hash(userId, roomId, category, totalPrice, startDate, endDate, additionalOptions);
+        return Objects.hash(userId, roomId, bookingId, totalPrice, category, startDate, endDate, additionalOptions);
     }
 
     @Override
@@ -128,8 +140,9 @@ public class BookResponse {
         return "BookResponse{" +
                 "userId=" + userId +
                 ", roomId=" + roomId +
-                ", category=" + category +
+                ", bookingId=" + bookingId +
                 ", totalPrice=" + totalPrice +
+                ", category=" + category +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", additionalOptions=" + additionalOptions +

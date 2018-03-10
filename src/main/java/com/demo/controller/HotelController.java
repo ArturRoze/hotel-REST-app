@@ -1,17 +1,23 @@
 package com.demo.controller;
 
-import com.demo.domain.income.PeriodBookRequest;
 import com.demo.model.Booking;
-import com.demo.model.Room;
 import com.demo.service.HotelService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.demo.model.Hotel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+/**
+ * Controller for {@link Hotel}
+ *
+ * @author Artyr
+ */
 @RestController
 @RequestMapping("/hotel")
 public class HotelController {

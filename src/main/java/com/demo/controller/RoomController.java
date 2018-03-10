@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller for {@link Room}
+ *
+ * @author Artyr
+ */
 @RestController
 @RequestMapping("/rooms")
 public class RoomController {

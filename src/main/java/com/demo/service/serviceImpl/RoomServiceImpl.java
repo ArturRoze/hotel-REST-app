@@ -11,22 +11,23 @@ import com.demo.model.AdditionalOption;
 import com.demo.model.Booking;
 import com.demo.model.Room;
 import com.demo.service.RoomService;
-import org.h2.util.DateTimeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 import java.sql.Timestamp;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Service for managing {@link Room} in repository
+ *
+ * @author Artur
+ * @see RoomService
+ */
 @Service
 public class RoomServiceImpl implements RoomService {
 
@@ -61,55 +62,40 @@ public class RoomServiceImpl implements RoomService {
 
     }
 
-    //Надо разделить на методы !!!
+    //НЕ ТО ЧТО НАДО ВОЗВРАЩАЕТ !!! Надо разделить на методы !!!
     @Override
     @Transactional
     public BookResponse bookRoom(BookRequest bookRequest) {
-        LOGGER.info("user with id {} books room with category: {}", bookRequest.getUserId(), bookRequest.getCategory());
+        LOGGER.info("user with id {} books room with id: {}", bookRequest.getUserId(), bookRequest.getRoomId());
         Long userId = bookRequest.getUserId();
-
-        List<Room> allAvailableRoomsOnPeriod = roomRepository.getAllAvailableRoomsOnPeriod(bookRequest.getStartDate(), bookRequest.getEndDate());
-
-        Long idSuitableRoom = 0L;
-        Double priceRoom = 0.0;
-        for (Room room : allAvailableRoomsOnPeriod) {
-            if (room.getCategory().equals(bookRequest.getCategory())){
-                idSuitableRoom = room.getId();
-                priceRoom = room.getPrice();
-                break;
-            }
-        }
-
-        Timestamp startDate = bookRequest.getStartDate();
-        Timestamp endDate = bookRequest.getEndDate();
-        Long countBookingsDay = endDate.getTime() - startDate.getTime();
-        Long days = TimeUnit.MILLISECONDS.toDays(countBookingsDay);// если секунд меньше чем на день 0 дней будет ?
-        if (days == 0){
-            days = 1L;
-        }
+        Room requiredRoom = roomRepository.findOne(bookRequest.getRoomId());
+        Long idRoom = requiredRoom.getId();
+        Category category = requiredRoom.getCategory();
 
         List<AdditionalOption> additionalOptionsByRequest = bookRequest.getAdditionalOptions();
-
         List<String> namesAdditionalOption = new ArrayList<>();
         for (AdditionalOption additionalOption : additionalOptionsByRequest) {
             namesAdditionalOption.add(additionalOption.getName());
         }
-
         List<AdditionalOption> allAdditionalOptionsForBooking = additionalOptionRepository.findByNameIn(namesAdditionalOption);
-
         Double totalPriceAdditionalOptions = 0.0;
         for (AdditionalOption additionalOption : allAdditionalOptionsForBooking) {
             totalPriceAdditionalOptions += additionalOption.getPrice();
         }
 
-        Double totalPrice = days * priceRoom + totalPriceAdditionalOptions;
+        Timestamp startDate = bookRequest.getStartDate();
+        Timestamp endDate = bookRequest.getEndDate();
+        Long countBookingsDay = endDate.getTime() - startDate.getTime();
+        Long days = TimeUnit.MILLISECONDS.toDays(countBookingsDay);
+        if (days == 0) {
+            days = 1L;
+        }
+        Double totalPrice = days * requiredRoom.getPrice() + totalPriceAdditionalOptions;
 
-        Booking booking = new Booking(totalPrice, startDate, endDate, userId, idSuitableRoom);
-
+        Booking booking = new Booking(totalPrice, startDate, endDate, userId, idRoom);
         booking.setAdditionalOptions(allAdditionalOptionsForBooking);
-
         Booking savedBooking = bookingRepository.save(booking);
 
-        return new BookResponse(savedBooking.getUserId(), idSuitableRoom, bookRequest.getCategory(), totalPrice, bookRequest.getStartDate(), bookRequest.getEndDate());
+        return new BookResponse(userId, idRoom, savedBooking.getId(), totalPrice, category, bookRequest.getStartDate(), bookRequest.getEndDate());
     }
 }

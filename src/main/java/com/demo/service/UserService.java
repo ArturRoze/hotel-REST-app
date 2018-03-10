@@ -18,5 +18,5 @@ public interface UserService {
 
     Double getTotalPriceOfBookings(Long id);
 
-    Double getTotalPriceOfBooking(Long userId, Long bookingId);
+    Double getTotalPriceBookingByUserId(Long userId, Long bookingId);
 }

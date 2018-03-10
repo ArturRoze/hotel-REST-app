@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 /**
- * Specifies methods used to obtain and modify room related information
+ * Specifies methods used to obtain and modify {@link Room} related information
  * which is stored in the database.
  *
  * @author Artur
