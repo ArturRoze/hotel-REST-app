@@ -54,10 +54,12 @@ Application has API, it allows you to work with the application using JSON
 **`GET`** **`/hotel/{idHotel}/bookings/all`** get all bookings for the hotel.(for example test idHotel = 1, 2)
 
 **3. Requirements**\
-Java 1.8\
-Apache Maven 3.3.9 or higher\
-Rest client(for example "Postman").
+Java 1.8 https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html\
+Apache Maven 3.5.3 https://maven.apache.org/install.html\
+Rest client(for example "Postman"). https://www.getpostman.com/
 
-**4. How to run**
+**4. How to run**\
+Download project from Git.
+Open commandLine go to directory with pom.xml (root project for example C:\Users\Artur\IdeaProjects\hotel-app)
 
-mvn spring-boot:run
+**mvn spring-boot:run**
