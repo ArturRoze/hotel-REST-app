@@ -24,14 +24,13 @@ public class HotelController {
 
     private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
-    private HotelService hotelService;
+    private final HotelService hotelService;
 
     @Autowired
     public HotelController(HotelService hotelService) {
         this.hotelService = hotelService;
     }
 
-    //WORKs
     @GetMapping("/{idHotel}/bookings/all")
     public List<Booking> getAllBookingsByHotelId(@PathVariable Long idHotel) {
         LOGGER.info("get all booking rooms in hotel with id: {}", idHotel);

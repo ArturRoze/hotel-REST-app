@@ -6,7 +6,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "additional_option")
 public class AdditionalOption {
-
     @Id
     @GeneratedValue
     private Long id;

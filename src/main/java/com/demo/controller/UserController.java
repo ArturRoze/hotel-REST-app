@@ -24,14 +24,13 @@ public class UserController {
 
     private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    // WORKs
     @PostMapping("/create")
     public UserDataResponse createUser(@RequestBody UserDataRequest request) {
         LOGGER.info("Creating User : {}", request);
@@ -48,7 +47,6 @@ public class UserController {
         }
     }
 
-    //WORKs
     @GetMapping("/all")
     public List<User> getAllUsers() {
         LOGGER.info("get all users");
@@ -59,7 +57,6 @@ public class UserController {
         return null;
     }
 
-    //WORKs
     @GetMapping("{userId}/booking")
     public List<Booking> getBooking(@PathVariable Long userId) {
         LOGGER.info("get booking by user with id: {}", userId);
@@ -69,7 +66,6 @@ public class UserController {
         return null;
     }
 
-    //WORKs
     @GetMapping("{userId}/bookings/total_price")
     public Double getTotalPriceOfBookings(@PathVariable Long userId) {
         LOGGER.info("get total price of bookings by user with id: {}", userId);
@@ -79,7 +75,6 @@ public class UserController {
         return null;
     }
 
-    //WORKs
     @GetMapping("{userId}/booking/{bookingId}/total_price")
     public Double getTotalPriceBookingByUserId(@PathVariable Long userId, @PathVariable Long bookingId) {
         LOGGER.info("get total price of booking by user with id: {} and booking id: {}", userId, bookingId);

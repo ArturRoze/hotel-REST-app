@@ -56,6 +56,7 @@ Application has API, it allows you to work with the application using JSON
 **3. Requirements**\
 Java 1.8 https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html\
 Apache Maven 3.5.3 https://maven.apache.org/install.html\
+For manage the application need 
 Rest client(for example "Postman"). https://www.getpostman.com/
 
 **4. How to run**\

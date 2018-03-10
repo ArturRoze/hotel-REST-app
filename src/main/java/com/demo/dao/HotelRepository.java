@@ -10,5 +10,4 @@ import org.springframework.data.repository.CrudRepository;
  * @author Artur
  */
 public interface HotelRepository extends CrudRepository<Hotel, Long> {
-
 }

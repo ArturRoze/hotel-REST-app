@@ -30,13 +30,10 @@ public class UserServiceImpl implements UserService {
 
     private final BookingRepository bookingRepository;
 
-    private final RoomRepository roomRepository;
-
     @Autowired
     public UserServiceImpl(UserRepository userRepository, BookingRepository bookingRepository, RoomRepository roomRepository) {
         this.userRepository = userRepository;
         this.bookingRepository = bookingRepository;
-        this.roomRepository = roomRepository;
     }
 
     /**

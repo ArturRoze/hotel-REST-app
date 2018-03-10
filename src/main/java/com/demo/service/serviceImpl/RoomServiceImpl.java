@@ -35,7 +35,7 @@ public class RoomServiceImpl implements RoomService {
 
     private final RoomRepository roomRepository;
 
-    private AdditionalOptionRepository additionalOptionRepository;
+    private final AdditionalOptionRepository additionalOptionRepository;
 
     private final BookingRepository bookingRepository;
 

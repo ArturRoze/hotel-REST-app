@@ -4,6 +4,7 @@ import com.demo.dao.BookingRepository;
 import com.demo.model.Booking;
 import com.demo.service.serviceImpl.HotelServiceImpl;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -15,9 +16,15 @@ import java.util.List;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 @RunWith(MockitoJUnitRunner.class)
 public class HotelServiceImplTest {
+
+    @BeforeClass
+    public static void beforeClass() {
+        initMocks(HotelServiceImpl.class);
+    }
 
     @Mock
     private BookingRepository bookingRepository;

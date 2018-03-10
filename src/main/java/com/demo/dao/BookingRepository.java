@@ -17,13 +17,9 @@ public interface BookingRepository extends CrudRepository<Booking, Long> {
 
     List<Booking> findAllByUserId(Long id);
 
-    //WORKs
     @Query("select b.totalPrice from Booking b where b.userId = :userId AND b.id = :bookingId")
     Double getTotalPriceBookingByUserId(@Param("userId") Long userId, @Param("bookingId") Long bookingId);
 
-    //WORKs
     @Query("select b from Booking b where b.roomId in (select r.id from Room r where r.hotelId = :id)")
     List<Booking> getAllBookingsByHotelId(@Param("id") Long id);
-
-
 }

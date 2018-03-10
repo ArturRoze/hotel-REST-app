@@ -24,7 +24,7 @@ public class RoomController {
 
     private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
-    private RoomService roomService;
+    private final RoomService roomService;
 
     @Autowired
     public RoomController(RoomService roomService) {
@@ -40,7 +40,6 @@ public class RoomController {
         return null;
     }
 
-    //WORKs
     @GetMapping("/category")
     public List<Room> getRoomsOfCategory(@RequestParam Category nameCategory) {
         LOGGER.info("get rooms with category: {}", nameCategory);
@@ -49,7 +48,7 @@ public class RoomController {
         }
         return null;
     }
-    //WORKs
+
     @PostMapping("/book")
     public BookResponse bookRoomOnDate(@RequestBody BookRequest request) {
         LOGGER.info("user books room on date: {}", request);
