@@ -14,18 +14,31 @@ Application has API, it allows you to work with the application using JSON
 **2.3**\
 **`POST`** **`/user/create`** with a user object as JSON creates a new user.\
 {
-"name": "name",
-"login: "login",
-"surname": "surname"
+    "name": "name",
+    "login: "login",
+    "surname": "surname"
 }\
 **2.4**\
-**`POST`** **`/rooms/booking`** book the room for specified days.\
+**`POST`** **`/rooms/book`** book the room for specified days. Available values for test: name = (clean, wash, breakfast); category = (SINGLE, DOUBLE, APARTMENT)\
 {
-"userId": 1,
-"roomId": 1,
-"category": "name",
-"startDate": "yyyy-MM-dd hh:mm:ss",
-"endDate": "yyyy-MM-dd hh:mm:ss"
+	"userId": 1,
+	"category": "SINGLE",
+	"startDate": "yyyy-MM-dd hh:mm:ss",
+	"endDate": "yyyy-MM-dd hh:mm:ss",
+	"additionalOptions": [{
+		"name": "breakfast"
+	}]
+}\
+**response:**\
+{
+    "userId": 1,
+    "roomId": ?,
+    "category": "name",
+    "startDate": "yyyy-MM-dd hh:mm:ss",
+    "endDate": "yyyy-MM-dd hh:mm:ss",
+    "additionalOptions": [{
+    		"name": "breakfast"
+    }]
 }\
 **2.5**\
 **`GET`** **`/user/all`** return all users from database.\

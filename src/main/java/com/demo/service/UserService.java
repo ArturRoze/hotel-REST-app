@@ -2,7 +2,6 @@ package com.demo.service;
 
 import com.demo.domain.income.UserDataRequest;
 import com.demo.model.Booking;
-import com.demo.model.Room;
 import com.demo.model.User;
 import org.springframework.stereotype.Service;
 

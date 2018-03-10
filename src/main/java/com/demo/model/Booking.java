@@ -15,7 +15,7 @@ public class Booking {
     private Long id;
 
     @Column(name = "total_price")
-    private Long totalPrice;
+    private Double totalPrice;
 
     @Column(name = "start_date")
     private Timestamp startDate;
@@ -35,7 +35,7 @@ public class Booking {
     public Booking() {
     }
 
-    public Booking(Long totalPrice, Timestamp startDate, Timestamp endDate, Long userId, Long roomId) {
+    public Booking(Double totalPrice, Timestamp startDate, Timestamp endDate, Long userId, Long roomId) {
         this.totalPrice = totalPrice;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -51,11 +51,11 @@ public class Booking {
         this.id = id;
     }
 
-    public Long getTotalPrice() {
+    public Double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Long totalPrice) {
+    public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
     }
 

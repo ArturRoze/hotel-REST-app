@@ -20,9 +20,7 @@ public interface RoomRepository extends CrudRepository<Room, Long> {
     //WORKs
     List<Room> findAllByCategory(Category category);
 
-    //WORKs //TODO
-    @Query("select r.id from Room r where r.id not in (select b.roomId from Booking b where b.startDate <= :startDate and b.endDate >= :endDate)")
-    List<Long> getAllAvailableRoomsOnPeriod(@Param("startDate") Timestamp starDate, @Param("endDate") Timestamp endDate);
-
-//    List<Room> getAllByBookingsExists();
+    //WORKs
+    @Query("select r from Room r where r.id not in (select b.roomId from Booking b where not (b.startDate <= :startDate or b.endDate >= :endDate))")
+    List<Room> getAllAvailableRoomsOnPeriod(@Param("startDate") Timestamp starDate, @Param("endDate") Timestamp endDate);
 }

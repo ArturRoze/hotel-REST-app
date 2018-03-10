@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 /**
  * Specifies methods used to obtain and modify user related information
  * which is stored in the database.
+ *
  * @author Artur
  */
 public interface UserRepository extends CrudRepository<User, Long> {

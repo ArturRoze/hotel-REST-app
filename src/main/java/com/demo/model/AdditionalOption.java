@@ -21,10 +21,9 @@ public class AdditionalOption {
     public AdditionalOption() {
     }
 
-    public AdditionalOption(String name, double price, Long bookingId) {
+    public AdditionalOption(String name, double price) {
         this.name = name;
         this.price = price;
-        this.bookingId = bookingId;
     }
 
     public Long getId() {
@@ -78,7 +77,7 @@ public class AdditionalOption {
 
     @Override
     public String toString() {
-        return "AdditionalOption{" +
+        return "AdditionalOptionRepository{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +

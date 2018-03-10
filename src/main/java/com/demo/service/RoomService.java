@@ -4,11 +4,9 @@ import com.demo.domain.Category;
 import com.demo.domain.income.BookRequest;
 import com.demo.domain.income.PeriodBookRequest;
 import com.demo.domain.outcome.BookResponse;
-import com.demo.model.Booking;
 import com.demo.model.Room;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @Service
