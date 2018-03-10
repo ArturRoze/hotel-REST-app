@@ -1,6 +1,7 @@
 package com.demo.service.impl;
 
 import com.demo.dao.AdditionalOptionRepository;
+import com.demo.dao.BookingRepository;
 import com.demo.dao.RoomRepository;
 import com.demo.service.serviceImpl.RoomServiceImpl;
 import org.junit.BeforeClass;
@@ -15,6 +16,9 @@ import static org.mockito.MockitoAnnotations.initMocks;
 @RunWith(MockitoJUnitRunner.class)
 public class RoomServiceImplTest {
 
+    public RoomServiceImplTest() {
+    }
+
     @BeforeClass
     public static void beforeClass() {
         initMocks(RoomServiceImpl.class);
@@ -26,8 +30,8 @@ public class RoomServiceImplTest {
     @Mock
     private AdditionalOptionRepository additionalOptionRepository;
 
-//    @Mock
-//    private BookingRepository bookingRepository;
+    @Mock
+    private BookingRepository bookingRepository;
 
     @InjectMocks
     RoomServiceImpl roomService;
