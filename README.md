@@ -23,8 +23,8 @@ Application has API, it allows you to work with the application using JSON
 {
 	"userId": 1,
 	"roomId": 4,
-	"startDate": "yyyy-MM-dd hh:mm:ss",
-	"endDate": "yyyy-MM-dd hh:mm:ss",
+	"startDate": "2018-03-28 12:00:10",
+	"endDate": "2018-03-30 13:00:00",
 	"additionalOptions": [{
 		"name": "breakfast"
 	}]

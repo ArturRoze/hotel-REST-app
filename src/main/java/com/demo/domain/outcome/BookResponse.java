@@ -40,7 +40,7 @@ public class BookResponse {
     public BookResponse() {
     }
 
-    public BookResponse(Long userId, Long roomId, Long bookingId, Double totalPrice, Category category, Timestamp startDate, Timestamp endDate) {
+    public BookResponse(Long userId, Long roomId, Long bookingId, Double totalPrice, Category category, Timestamp startDate, Timestamp endDate, List<AdditionalOption> additionalOptions) {
         this.userId = userId;
         this.roomId = roomId;
         this.bookingId = bookingId;
@@ -48,6 +48,7 @@ public class BookResponse {
         this.category = category;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.additionalOptions = additionalOptions;
     }
 
     public Long getUserId() {

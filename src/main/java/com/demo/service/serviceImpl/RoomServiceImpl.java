@@ -40,12 +40,12 @@ public class RoomServiceImpl implements RoomService {
     private final BookingRepository bookingRepository;
 
     @Autowired
-    public RoomServiceImpl(RoomRepository roomRepository, BookingRepository bookingRepository) {
+    public RoomServiceImpl(RoomRepository roomRepository, AdditionalOptionRepository additionalOptionRepository, BookingRepository bookingRepository) {
         this.roomRepository = roomRepository;
+        this.additionalOptionRepository = additionalOptionRepository;
         this.bookingRepository = bookingRepository;
     }
 
-    //WORKs
     @Override
     @Transactional
     public List<Room> getAllAvailableRoom(PeriodBookRequest periodBookRequest) {
@@ -53,16 +53,13 @@ public class RoomServiceImpl implements RoomService {
         return roomRepository.getAllAvailableRoomsOnPeriod(periodBookRequest.getStartDate(), periodBookRequest.getEndDate());
     }
 
-    //WORKs
     @Override
     @Transactional
     public List<Room> getRoomsOfCategory(Category nameCategory) {
         LOGGER.info("get room of category: {}", nameCategory);
         return roomRepository.findAllByCategory(nameCategory);
-
     }
 
-    //НЕ ТО ЧТО НАДО ВОЗВРАЩАЕТ !!! Надо разделить на методы !!!
     @Override
     @Transactional
     public BookResponse bookRoom(BookRequest bookRequest) {
@@ -96,6 +93,6 @@ public class RoomServiceImpl implements RoomService {
         booking.setAdditionalOptions(allAdditionalOptionsForBooking);
         Booking savedBooking = bookingRepository.save(booking);
 
-        return new BookResponse(userId, idRoom, savedBooking.getId(), totalPrice, category, bookRequest.getStartDate(), bookRequest.getEndDate());
+        return new BookResponse(userId, idRoom, savedBooking.getId(), totalPrice, category, bookRequest.getStartDate(), bookRequest.getEndDate(), allAdditionalOptionsForBooking);
     }
 }
