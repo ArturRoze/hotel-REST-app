@@ -1,9 +1,7 @@
 package com.demo.service.impl;
 
 import com.demo.dao.AdditionalOptionRepository;
-import com.demo.dao.BookingRepository;
 import com.demo.dao.RoomRepository;
-import com.demo.service.RoomService;
 import com.demo.service.serviceImpl.RoomServiceImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
