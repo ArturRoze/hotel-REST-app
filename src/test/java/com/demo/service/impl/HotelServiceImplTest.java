@@ -33,7 +33,7 @@ public class HotelServiceImplTest {
     private HotelServiceImpl hotelService;
 
     @Test
-    public void testGetAllBookingsOfHotelTest() {
+    public void getAllBookingsOfHotelTest() {
 
         Booking booking = new Booking();
         booking.setId(456L);
