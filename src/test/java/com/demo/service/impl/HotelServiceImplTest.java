@@ -12,8 +12,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -36,14 +38,14 @@ public class HotelServiceImplTest {
     public void getAllBookingsOfHotelTest() {
 
         Booking booking = new Booking();
-        booking.setId(456L);
-        List<Booking> bookings = Arrays.asList(booking);
+        booking.setId(435L);
+        List<Booking> bookings = Collections.singletonList(booking);
 
         when(bookingRepository.getAllBookingsByHotelId(123L)).thenReturn(bookings);
 
         List<Booking> result = hotelService.getAllBookingsOfHotel(123L);
 
-        Assert.assertEquals(result, bookings);
+        assertEquals(result, bookings);
 
         verify(bookingRepository).getAllBookingsByHotelId(123L);
     }

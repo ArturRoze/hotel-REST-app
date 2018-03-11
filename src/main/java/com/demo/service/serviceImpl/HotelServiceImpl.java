@@ -30,7 +30,7 @@ public class HotelServiceImpl implements HotelService {
     }
 
     public List<Booking> getAllBookingsOfHotel(Long idHotel) {
-        LOGGER.info("getting all booking from hotel with id: {}", idHotel);
+        LOGGER.info("getting all bookings from hotel with id: {}", idHotel);
         return bookingRepository.getAllBookingsByHotelId(idHotel);
     }
 }
