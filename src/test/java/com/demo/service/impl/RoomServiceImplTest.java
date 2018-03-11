@@ -25,10 +25,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -52,16 +52,10 @@ public class RoomServiceImplTest {
     private BookingRepository bookingRepository;
 
     @Mock
-    private BookRequest bookRequest;
-
-    @Mock
     private Room room;
 
     @Mock
     private PeriodBookRequest periodBookRequest;
-
-    @Mock
-    private AdditionalOption additionalOption;
 
     @InjectMocks
     private RoomServiceImpl roomService;
@@ -95,9 +89,47 @@ public class RoomServiceImplTest {
         verify(roomRepository).findAllByCategory(room.getCategory());
     }
 
-    @Test
+    @Test //TODO
     public void bookRoomTest() {
+        //arrange
+        Room roomFromRepository = getDummyRoom();
+        roomFromRepository.setId(2L);
+        BookRequest bookRequest = getDummyBookRequest();
+        when(roomRepository.findOne(bookRequest.getRoomId())).thenReturn(roomFromRepository);
+        bookRequest.setAdditionalOptions(getDummyAdditionalOptions());
+        List<AdditionalOption> additionalOptionsInRepositoryFromRequest = getDummyAdditionalOptions();
+        when(additionalOptionRepository.findByNameIn(Collections.singletonList(bookRequest.getAdditionalOptions().get(0).getName()))).thenReturn(additionalOptionsInRepositoryFromRequest);
+        Double dummyTotalPrice = 150.0;
+        Booking booking = getDummyBooking(roomFromRepository, dummyTotalPrice);
+        booking.setAdditionalOptions(additionalOptionsInRepositoryFromRequest);
+        Booking savedBooking = getDummyBooking(roomFromRepository, dummyTotalPrice);
+        savedBooking.setId(12L);
+        when(bookingRepository.save(booking)).thenReturn(savedBooking);
 
+        //action
+        BookResponse actualBookResponse = roomService.bookRoom(bookRequest);
 
+        //assert
+        BookResponse expectedBookResponse = new BookResponse(bookRequest.getUserId(), roomFromRepository.getId(), savedBooking.getId(), dummyTotalPrice, roomFromRepository.getCategory(), bookRequest.getStartDate(), bookRequest.getEndDate(), additionalOptionsInRepositoryFromRequest);
+        assertEquals(expectedBookResponse, actualBookResponse);
+    }
+
+    private Booking getDummyBooking(Room room, Double dummyTotalPrice) {
+        return new Booking(dummyTotalPrice, getDummyBookRequest().getStartDate(), getDummyBookRequest().getEndDate(), getDummyBookRequest().getUserId(), room.getId());
+    }
+
+    private List<AdditionalOption> getDummyAdditionalOptions() {
+        AdditionalOption additionalOption = new AdditionalOption("clean", 10);
+        return Collections.singletonList(additionalOption);
+    }
+
+    private Room getDummyRoom() {
+        return new Room(7, Category.SINGLE, 100.0, 1L);
+    }
+
+    private BookRequest getDummyBookRequest() {
+        Timestamp startDate = new Timestamp(System.currentTimeMillis());
+        Timestamp endDate = new Timestamp(System.currentTimeMillis() + 86400003);
+        return new BookRequest(1L, 2L, startDate, endDate);
     }
 }
