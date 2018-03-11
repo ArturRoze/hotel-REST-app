@@ -3,16 +3,16 @@ Demo REST application for management rooms in hotel by user.\
 Application has API, it allows you to work with the application using JSON
 2. **API:**\
 **2.1**\
-**`POST`** **`/rooms/all`** returns list of available rooms for specified dates.\
+**`POST`** **`http://localhost:8080/rooms/all`** returns list of available rooms for specified dates.\
 {
 	"startDate": "2018-03-25 12:00:10",
 	"endDate": "2018-03-26 13:00:00"
 }\
 **2.2**\
-**`GET`** **`/rooms/category?nameCategory=SINGLE`** returns rooms filtered by category.
+**`GET`** **`http://localhost:8080/rooms/category?nameCategory=SINGLE`** returns rooms filtered by category.
 (available values SINGLE, DOUBLE, APARTMENT)\
 **2.3**\
-**`POST`** **`/user/create`** with a user object as JSON creates a new user.\
+**`POST`** **`http://localhost:8080/user/create`** with a user object as JSON creates a new user.\
 {
     "name": "Artur",
     "login: "crusher",
