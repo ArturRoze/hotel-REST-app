@@ -105,7 +105,7 @@ public class UserServiceImpl implements UserService {
     /**
      * Method get total price of booking for specific user
      *
-     * @param userId id of user
+     * @param userId    id of user
      * @param bookingId id of booking
      * @return total price of booking for user
      */

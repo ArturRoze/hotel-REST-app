@@ -12,9 +12,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.Collections;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -39,8 +40,16 @@ public class UserServiceImplTest {
     @Test
     public void getAllTest() {
 
+        //arrange
+        List<User> expectedUsers = Collections.singletonList(getTestUser());
 
+        when(userRepository.findAll()).thenReturn(expectedUsers);
+        //action
+        List<User> actualUsers = userService.getAll();
 
+        //assert
+        assertEquals(expectedUsers, actualUsers);
+        verify(userRepository).findAll();
     }
 
     @Test
@@ -65,14 +74,36 @@ public class UserServiceImplTest {
 
     @Test
     public void readAllBookingOfUserTest() {
+
+        //arrange
+
+        //action
+
+        //assert
+
+
     }
 
     @Test
     public void getTotalPriceOfBookingsTest() {
+
+        //arrange
+
+        //action
+
+        //assert
+
     }
 
     @Test
     public void getTotalPriceBookingByUserIdTest() {
+
+        //arrange
+
+        //action
+
+        //assert
+
     }
 
     private User getTestUser() {
@@ -80,6 +111,6 @@ public class UserServiceImplTest {
     }
 
     private UserDataRequest getUserDataRequest() {
-         return new UserDataRequest("name", "login", "surname");
+        return new UserDataRequest("name", "login", "surname");
     }
 }
