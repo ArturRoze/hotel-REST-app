@@ -32,13 +32,17 @@ public class UserControllerTest {
     @Test
     public void createUserTest() {
 
+        //arrange
         UserDataRequest userDataRequest = new UserDataRequest();
         userDataRequest.setLogin("iceWoman");
         userDataRequest.setName("Alina");
         userDataRequest.setSurname("Roze");
 
+        //action
         ResponseEntity<UserDataResponse> responseEntity = restTemplate.exchange("/user/create", HttpMethod.POST, new HttpEntity<>(userDataRequest), new ParameterizedTypeReference<UserDataResponse>() {
         });
+
+        //assert
         assertEquals(200, responseEntity.getStatusCodeValue());
         UserDataResponse body = responseEntity.getBody();
         assertNotNull(body.getUserId());
@@ -50,13 +54,15 @@ public class UserControllerTest {
     @Test
     public void getAllUsersTest() throws Exception {
 
+        //action
         ResponseEntity<List<User>> responseEntity = restTemplate.exchange("/user/all", HttpMethod.GET, null, new ParameterizedTypeReference<List<User>>() {
         });
+
+        //assert
         assertEquals(200, responseEntity.getStatusCodeValue());
         List<User> body = responseEntity.getBody();
         assertNotNull(body);
         assertEquals(5, body.size());
-
         User user = body.get(0);
         assertEquals(Long.valueOf(1L), user.getId());
         assertEquals("sky", user.getLogin());
@@ -67,13 +73,15 @@ public class UserControllerTest {
     @Test
     public void getBookingTest() {
 
+        //action
         ResponseEntity<List<Booking>> responseEntity = restTemplate.exchange("/user/3/booking", HttpMethod.GET, null, new ParameterizedTypeReference<List<Booking>>() {
         });
+
+        //assert
         assertEquals(200, responseEntity.getStatusCodeValue());
         List<Booking> body = responseEntity.getBody();
         assertNotNull(body);
         assertEquals(1, body.size());
-
         Booking booking = body.get(0);
         assertEquals(Double.valueOf(385), booking.getTotalPrice());
         assertEquals(Long.valueOf(3), booking.getUserId());
@@ -83,8 +91,11 @@ public class UserControllerTest {
     @Test
     public void getTotalPriceOfBookingsTest() {
 
+        //action
         ResponseEntity<Double> responseEntity = restTemplate.exchange("/user/1/bookings/total_price", HttpMethod.GET, null, new ParameterizedTypeReference<Double>() {
         });
+
+        //assert
         assertEquals(200, responseEntity.getStatusCodeValue());
         Double body = responseEntity.getBody();
         assertNotNull(body);
@@ -94,9 +105,11 @@ public class UserControllerTest {
     @Test
     public void getTotalPriceBookingByUserIdTest() {
 
+        //action
         ResponseEntity<Double> responseEntity = restTemplate.exchange("/user/1/booking/1/total_price", HttpMethod.GET, null, new ParameterizedTypeReference<Double>() {
-
         });
+
+        //assert
         assertEquals(200, responseEntity.getStatusCodeValue());
         Double body = responseEntity.getBody();
         assertNotNull(body);

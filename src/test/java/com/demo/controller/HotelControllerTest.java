@@ -28,8 +28,11 @@ public class HotelControllerTest {
     @Test
     public void getAllBookingsByHotelIdTest() {
 
+        //action
         ResponseEntity<List<Booking>> responseEntity = restTemplate.exchange("/hotel/1/bookings/all", HttpMethod.GET, null, new ParameterizedTypeReference<List<Booking>>() {
         });
+
+        //assert
         assertEquals(200, responseEntity.getStatusCodeValue());
         List<Booking> body = responseEntity.getBody();
         assertNotNull(body);
