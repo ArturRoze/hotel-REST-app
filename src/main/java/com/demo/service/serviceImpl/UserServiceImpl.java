@@ -59,6 +59,7 @@ public class UserServiceImpl implements UserService {
         LOGGER.info("Save user: {}", userDataRequest);
         User existingUser = userRepository.getByLogin(userDataRequest.getLogin());
         if (existingUser != null) {
+            LOGGER.info("user with the same login: {} already exists");
             return existingUser;
         }
         User user = new User(userDataRequest.getLogin(), userDataRequest.getName(), userDataRequest.getSurname());

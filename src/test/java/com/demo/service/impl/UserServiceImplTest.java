@@ -3,6 +3,7 @@ package com.demo.service.impl;
 import com.demo.dao.BookingRepository;
 import com.demo.dao.UserRepository;
 import com.demo.domain.income.UserDataRequest;
+import com.demo.model.Booking;
 import com.demo.model.User;
 import com.demo.service.serviceImpl.UserServiceImpl;
 import org.junit.BeforeClass;
@@ -14,6 +15,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -29,7 +31,7 @@ public class UserServiceImplTest {
     }
 
     @InjectMocks
-    UserServiceImpl userService;
+    private UserServiceImpl userService;
 
     @Mock
     private UserRepository userRepository;
@@ -76,34 +78,60 @@ public class UserServiceImplTest {
     public void readAllBookingOfUserTest() {
 
         //arrange
+        Booking booking = new Booking();
+        List<Booking> expectedBookings = Collections.singletonList(booking);
+        User testUser = getTestUser();
+        testUser.setId(5L);
+
+        when(bookingRepository.findAllByUserId(testUser.getId())).thenReturn(expectedBookings);
 
         //action
+        List<Booking> actualBookings = userService.readAllBookingOfUser(testUser.getId());
 
         //assert
-
-
+        assertEquals(expectedBookings, actualBookings);
+        verify(bookingRepository).findAllByUserId(5L);
     }
 
     @Test
     public void getTotalPriceOfBookingsTest() {
 
         //arrange
+        Booking booking = new Booking();
+        booking.setId(4L);
+        booking.setTotalPrice(150.0);
+        User testUser = getTestUser();
+        testUser.setId(12L);
+        List<Booking> expectedBooking = Collections.singletonList(booking);
+        Double expectedTotalPrice = booking.getTotalPrice();
+        when(bookingRepository.findAllByUserId(12L)).thenReturn(expectedBooking);
 
         //action
+        Double actualTotalPrice = userService.getTotalPriceOfBookings(testUser.getId());
 
         //assert
-
+        assertEquals(expectedTotalPrice, actualTotalPrice);
+        verify(bookingRepository).findAllByUserId(testUser.getId());
     }
 
     @Test
     public void getTotalPriceBookingByUserIdTest() {
 
+        Booking booking = new Booking();
+        booking.setId(21L);
+        User testUser = getTestUser();
+        testUser.setId(1L);
+        Double expectedTotalPrice = 100.0;
+
         //arrange
+        when(bookingRepository.getTotalPriceBookingByUserId(testUser.getId(), booking.getId())).thenReturn(expectedTotalPrice);
 
         //action
+        Double actualTotalPrice = userService.getTotalPriceBookingByUserId(testUser.getId(), booking.getId());
 
         //assert
-
+        assertEquals(expectedTotalPrice, actualTotalPrice);
+        verify(bookingRepository).getTotalPriceBookingByUserId(testUser.getId(), booking.getId());
     }
 
     private User getTestUser() {
