@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -43,6 +44,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public List<User> getAll() {
+        LOGGER.info("getting all user from repository");
         return (List<User>) userRepository.findAll();
     }
 
@@ -77,6 +79,7 @@ public class UserServiceImpl implements UserService {
         List<Booking> allBookingsByUserId = bookingRepository.findAllByUserId(userId);
         if (allBookingsByUserId == null) {
             LOGGER.info("user with id: {} is not exist", userId);
+            return Collections.emptyList();
         }
         return allBookingsByUserId;
     }
@@ -90,6 +93,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public Double getTotalPriceOfBookings(Long userId) {
+        LOGGER.info("Get total price of bookings for user with id {}", userId);
         List<Booking> allBookingsByUserId = bookingRepository.findAllByUserId(userId);
         Double totalPriceBookingsByUserId = 0.0;
         for (Booking booking : allBookingsByUserId) {
@@ -108,6 +112,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public Double getTotalPriceBookingByUserId(Long userId, Long bookingId) {
+        LOGGER.info("Get total price of booking with id: {} for user with id: {}", userId, bookingId);
         return bookingRepository.getTotalPriceBookingByUserId(userId, bookingId);
     }
 }

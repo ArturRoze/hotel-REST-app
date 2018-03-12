@@ -84,14 +84,14 @@ public class RoomServiceImpl implements RoomService {
         Timestamp endDate = bookRequest.getEndDate();
         Long countBookingsDay = endDate.getTime() - startDate.getTime();
         Long days = null;
-        if (countBookingsDay >= 0){
+        if (countBookingsDay >= 0) {
             days = TimeUnit.MILLISECONDS.toDays(countBookingsDay);
             if (days == 0) {
                 days = 1L;
             }
         }
         Double totalPrice = 0.0;
-        if (days !=null){
+        if (days != null) {
             totalPrice = days * requiredRoom.getPrice() + totalPriceAdditionalOptions;
         }
 
