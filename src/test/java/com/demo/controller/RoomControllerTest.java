@@ -27,7 +27,6 @@ import static org.junit.Assert.assertNotNull;
 @ActiveProfiles("test")
 public class RoomControllerTest {
 
-
     @Autowired
     private TestRestTemplate restTemplate;
 
@@ -52,6 +51,7 @@ public class RoomControllerTest {
 
     @Test
     public void getRoomsOfCategoryTest() {
+
 
 
     }
