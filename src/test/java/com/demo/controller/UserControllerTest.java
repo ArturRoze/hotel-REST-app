@@ -95,6 +95,7 @@ public class UserControllerTest {
     public void getTotalPriceBookingByUserIdTest() {
 
         ResponseEntity<Double> responseEntity = restTemplate.exchange("/user/1/booking/1/total_price", HttpMethod.GET, null, new ParameterizedTypeReference<Double>() {
+
         });
         assertEquals(200, responseEntity.getStatusCodeValue());
         Double body = responseEntity.getBody();
