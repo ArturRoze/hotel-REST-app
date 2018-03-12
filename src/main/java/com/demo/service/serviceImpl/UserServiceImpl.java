@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -37,22 +36,12 @@ public class UserServiceImpl implements UserService {
         this.bookingRepository = bookingRepository;
     }
 
-    /**
-     * Method reads users from repository
-     *
-     * @return list of {@link User} from repository
-     */
     @Override
     public List<User> getAll() {
         LOGGER.info("getting all user from repository");
         return (List<User>) userRepository.findAll();
     }
 
-    /**
-     * Method saves {@link User} to repository
-     *
-     * @param userDataRequest {@link UserDataRequest} to save
-     */
     @Override
     @Transactional
     public User create(UserDataRequest userDataRequest) {
@@ -67,30 +56,13 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    /**
-     * Method collects all booking from repositories
-     *
-     * @param userId of user
-     * @return list of all {@link Booking} from repositories by id user
-     */
     @Override
     @Transactional
     public List<Booking> readAllBookingOfUser(Long userId) {
         LOGGER.info("Booking list of user with id: {}", userId);
-        List<Booking> allBookingsByUserId = bookingRepository.findAllByUserId(userId);
-        if (allBookingsByUserId == null) {
-            LOGGER.info("user with id: {} is not exist", userId);
-            return Collections.emptyList();
-        }
-        return allBookingsByUserId;
+        return bookingRepository.findAllByUserId(userId);
     }
 
-    /**
-     * Method get total price of booking for specific user
-     *
-     * @param userId id of user
-     * @return total price of bookings for specific user
-     */
     @Override
     @Transactional
     public Double getTotalPriceOfBookings(Long userId) {
@@ -103,13 +75,6 @@ public class UserServiceImpl implements UserService {
         return totalPriceBookingsByUserId;
     }
 
-    /**
-     * Method get total price of booking for specific user
-     *
-     * @param userId    id of user
-     * @param bookingId id of booking
-     * @return total price of booking for user
-     */
     @Override
     @Transactional
     public Double getTotalPriceBookingByUserId(Long userId, Long bookingId) {

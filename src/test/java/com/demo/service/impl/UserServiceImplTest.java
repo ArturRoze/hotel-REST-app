@@ -15,10 +15,10 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -61,7 +61,6 @@ public class UserServiceImplTest {
         User userRequest = new User(userDataRequest.getLogin(), userDataRequest.getName(), userDataRequest.getSurname());
         User expectedUser = getTestUser();
         expectedUser.setId(1L);
-
         when(userRepository.getByLogin(getUserDataRequest().getLogin())).thenReturn(null);
         when(userRepository.save(userRequest)).thenReturn(expectedUser);
 
@@ -117,13 +116,13 @@ public class UserServiceImplTest {
     @Test
     public void getTotalPriceBookingByUserIdTest() {
 
+        //arrange
         Booking booking = new Booking();
         booking.setId(21L);
         User testUser = getTestUser();
         testUser.setId(1L);
         Double expectedTotalPrice = 100.0;
 
-        //arrange
         when(bookingRepository.getTotalPriceBookingByUserId(testUser.getId(), booking.getId())).thenReturn(expectedTotalPrice);
 
         //action

@@ -3,7 +3,6 @@ package com.demo.service.impl;
 import com.demo.dao.BookingRepository;
 import com.demo.model.Booking;
 import com.demo.service.serviceImpl.HotelServiceImpl;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,16 +35,18 @@ public class HotelServiceImplTest {
     @Test
     public void getAllBookingsOfHotelTest() {
 
+        //arrange
         Booking booking = new Booking();
         booking.setId(435L);
-        List<Booking> bookings = Collections.singletonList(booking);
+        List<Booking> expectedBookings = Collections.singletonList(booking);
 
-        when(bookingRepository.getAllBookingsByHotelId(123L)).thenReturn(bookings);
+        when(bookingRepository.getAllBookingsByHotelId(123L)).thenReturn(expectedBookings);
 
-        List<Booking> result = hotelService.getAllBookingsOfHotel(123L);
+        //action
+        List<Booking> actual = hotelService.getAllBookingsOfHotel(123L);
 
-        assertEquals(result, bookings);
-
+        //assert
+        assertEquals(expectedBookings, actual);
         verify(bookingRepository).getAllBookingsByHotelId(123L);
     }
 }

@@ -48,7 +48,6 @@ public class RoomControllerTest {
         Room room = body.get(0);
         assertEquals(Double.valueOf(50), room.getPrice());
         assertEquals(Integer.valueOf(1), room.getNumber());
-
     }
 
     @Test

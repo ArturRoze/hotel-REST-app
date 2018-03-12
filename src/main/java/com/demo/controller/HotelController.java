@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
 /**
  * Controller for {@link Hotel}
  *
@@ -33,7 +34,7 @@ public class HotelController {
 
     @GetMapping("/{idHotel}/bookings/all")
     public List<Booking> getAllBookingsByHotelId(@PathVariable Long idHotel) {
-        LOGGER.info("get all booking rooms in hotel with id: {}", idHotel);
+        LOGGER.info("get all bookings rooms in hotel with id: {}", idHotel);
         if (StringUtils.hasLength(idHotel.toString())) {
             return hotelService.getAllBookingsOfHotel(idHotel);
         }

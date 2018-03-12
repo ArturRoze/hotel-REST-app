@@ -11,7 +11,6 @@ import com.demo.model.AdditionalOption;
 import com.demo.model.Booking;
 import com.demo.model.Room;
 import com.demo.service.serviceImpl.RoomServiceImpl;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -58,6 +57,7 @@ public class RoomServiceImplTest {
     @Test
     public void getAllAvailableRoomTest() {
 
+        //arrange
         List<Room> rooms = Collections.singletonList(room);
         Timestamp startDate = mock(Timestamp.class);
         Timestamp endDate = mock(Timestamp.class);
@@ -66,7 +66,10 @@ public class RoomServiceImplTest {
 
         when(roomRepository.getAllAvailableRoomsOnPeriod(periodBookRequest.getStartDate(), periodBookRequest.getEndDate())).thenReturn(rooms);
 
+        //action
         List<Room> allAvailableRoomsOnPeriod = roomService.getAllAvailableRoom(periodBookRequest);
+
+        //assert
         assertEquals(allAvailableRoomsOnPeriod, rooms);
         verify(roomRepository).getAllAvailableRoomsOnPeriod(periodBookRequest.getStartDate(), periodBookRequest.getEndDate());
     }
@@ -74,18 +77,22 @@ public class RoomServiceImplTest {
     @Test
     public void getRoomsOfCategoryTest() {
 
+        //arrange
         room.setCategory(Category.SINGLE);
         List<Room> rooms = Collections.singletonList(room);
         when(roomRepository.findAllByCategory(room.getCategory())).thenReturn(rooms);
 
+        //action
         List<Room> expectedRoomsByCategory = roomService.getRoomsOfCategory(room.getCategory());
 
+        //assert
         assertEquals(expectedRoomsByCategory, rooms);
         verify(roomRepository).findAllByCategory(room.getCategory());
     }
 
-    @Test //TODO
+    @Test
     public void bookRoomTest() {
+
         //arrange
         Room roomFromRepository = getDummyRoom();
         roomFromRepository.setId(2L);
@@ -112,7 +119,6 @@ public class RoomServiceImplTest {
 
         //assert
         verify(bookingRepository).save(any(Booking.class));
-
         BookResponse expectedBookResponse = new BookResponse(bookRequest.getUserId(), roomFromRepository.getId(), savedBooking.getId(), dummyTotalPrice, roomFromRepository.getCategory(), bookRequest.getStartDate(), bookRequest.getEndDate(), additionalOptionsInRepositoryFromRequest);
         assertEquals(expectedBookResponse, actualBookResponse);
     }
