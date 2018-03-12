@@ -62,7 +62,7 @@ public class UserControllerTest {
 
         when(userService.create(userDataRequest)).thenReturn(user);
 
-        String createUserJson = getUserDataReqest();
+        String createUserJson = getUserDataRequest();
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders
                 .post("/user/create")
@@ -110,7 +110,7 @@ public class UserControllerTest {
 
     }
 
-    private String getUserDataReqest() {
+    private String getUserDataRequest() {
         return "{\n" +
                 " \"name\": \"name\",\n" +
                 " \"login\": \"login\",\n" +

@@ -12,6 +12,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -41,18 +45,22 @@ public class UserServiceImplTest {
 
     @Test
     public void createTest() {
-//        //arrange
-//        UserDataRequest userDataRequest = getUserDataRequest();
-//        User savedUser = getTestUser();
-//        savedUser.setId(1L);
-//
-//        when(userRepository.getByLogin(getUserDataRequest().getLogin())).thenReturn(savedUser);
-//
-//        //action
-//        User expectedUser = userService.create(getUserDataRequest());
-//
-//        //assert
-//        assertEquals()
+        //arrange
+        UserDataRequest userDataRequest = getUserDataRequest();
+        User userRequest = new User(userDataRequest.getLogin(), userDataRequest.getName(), userDataRequest.getSurname());
+        User expectedUser = getTestUser();
+        expectedUser.setId(1L);
+
+        when(userRepository.getByLogin(getUserDataRequest().getLogin())).thenReturn(null);
+        when(userRepository.save(userRequest)).thenReturn(expectedUser);
+
+        //action
+        User actualUser = userService.create(getUserDataRequest());
+
+        //assert
+        assertEquals(expectedUser, actualUser);
+        verify(userRepository).getByLogin(getUserDataRequest().getLogin());
+        verify(userRepository).save(userRequest);
     }
 
     @Test
@@ -68,8 +76,7 @@ public class UserServiceImplTest {
     }
 
     private User getTestUser() {
-        User user = new User("login", "name", "surname");
-        return user;
+        return new User("login", "name", "surname");
     }
 
     private UserDataRequest getUserDataRequest() {

@@ -20,6 +20,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
 
@@ -129,8 +131,8 @@ public class RoomServiceImplTest {
     }
 
     private BookRequest getDummyBookRequest() {
-        Timestamp startDate = new Timestamp(System.currentTimeMillis());
-        Timestamp endDate = new Timestamp(System.currentTimeMillis() + 86400003);
+        Timestamp startDate = Timestamp.from(Instant.now());
+        Timestamp endDate = Timestamp.from(Instant.now().plus(1, ChronoUnit.DAYS));
         return new BookRequest(1L, 2L, startDate, endDate);
     }
 }

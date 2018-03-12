@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
     /**
      * Method collects all booking from repositories
      *
-     * @param userId
+     * @param userId of user
      * @return list of all {@link Booking} from repositories by id user
      */
     @Override
