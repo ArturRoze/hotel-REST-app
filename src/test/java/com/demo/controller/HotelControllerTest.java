@@ -1,6 +1,5 @@
 package com.demo.controller;
 
-import com.demo.Application;
 import com.demo.service.HotelService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = Application.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 public class HotelControllerTest {
 

@@ -1,8 +1,6 @@
 package com.demo.controller;
 
-import com.demo.Application;
 import com.demo.domain.income.UserDataRequest;
-import com.demo.domain.outcome.UserDataResponse;
 import com.demo.model.User;
 import com.demo.service.UserService;
 import org.junit.Before;
@@ -12,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -34,7 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = Application.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 public class UserControllerTest {
 
@@ -65,11 +62,7 @@ public class UserControllerTest {
 
         when(userService.create(userDataRequest)).thenReturn(user);
 
-        String createUserJson = "{\n" +
-                " \"name\": \"name\",\n" +
-                " \"login\": \"login\",\n" +
-                " \"surname\": \"surname\"\n" +
-                "}";
+        String createUserJson = getUserDataReqest();
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders
                 .post("/user/create")
@@ -99,7 +92,6 @@ public class UserControllerTest {
     }
 
 
-
     @Test
     public void getBookingTest() {
 
@@ -116,5 +108,13 @@ public class UserControllerTest {
     public void getTotalPriceBookingByUserIdTest() {
 
 
+    }
+
+    private String getUserDataReqest() {
+        return "{\n" +
+                " \"name\": \"name\",\n" +
+                " \"login\": \"login\",\n" +
+                " \"surname\": \"surname\"\n" +
+                "}";
     }
 }

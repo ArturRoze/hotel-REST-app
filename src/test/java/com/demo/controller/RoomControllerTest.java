@@ -1,37 +1,53 @@
 package com.demo.controller;
 
-import com.demo.Application;
-import com.demo.service.RoomService;
+import com.demo.domain.income.PeriodBookRequest;
+import com.demo.model.Room;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.context.WebApplicationContext;
+
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = Application.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 public class RoomControllerTest {
 
-    @Mock
-    private RoomService roomService;
-
-    @InjectMocks
-    RoomController roomController;
 
     @Autowired
-    WebApplicationContext context;
-
-    private MockMvc mvc;
+    private TestRestTemplate restTemplate;
 
     @Test
     public void getAllAvailableRoomsTest() {
 
+        PeriodBookRequest periodBookRequest = new PeriodBookRequest();
+        periodBookRequest.setStartDate(Timestamp.from(Instant.now()));
+        periodBookRequest.setEndDate(Timestamp.from(Instant.now().plus(1, ChronoUnit.DAYS)));
+
+        ResponseEntity<List<Room>> responseEntity = restTemplate.exchange("/rooms/all", HttpMethod.POST, new HttpEntity<>(periodBookRequest), new ParameterizedTypeReference<List<Room>>() {
+        });
+        assertEquals(200, responseEntity.getStatusCodeValue());
+        List<Room> body = responseEntity.getBody();
+        assertNotNull(body);
+        assertEquals(5, body.size());
+
+        Room room = body.get(0);
+        assertEquals(Double.valueOf(50), room.getPrice());
+        assertEquals(Integer.valueOf(1), room.getNumber());
 
     }
 
@@ -47,3 +63,4 @@ public class RoomControllerTest {
 
     }
 }
+
