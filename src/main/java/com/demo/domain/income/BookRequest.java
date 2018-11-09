@@ -16,7 +16,6 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 public class BookRequest {
 
     private Long userId;
-
     private Long roomId;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
@@ -91,7 +90,6 @@ public class BookRequest {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(userId, roomId, startDate, endDate, additionalOptions);
     }
 

@@ -12,22 +12,16 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "total_price")
     private Double totalPrice;
-
     @Column(name = "start_date")
     private Timestamp startDate;
-
     @Column(name = "end_date")
     private Timestamp endDate;
-
     @Column(name = "user_id")
     private Long userId;
-
     @Column(name = "room_id")
     private Long roomId;
-
     @OneToMany(mappedBy = "bookingId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<AdditionalOption> additionalOptions = new ArrayList<>();
 

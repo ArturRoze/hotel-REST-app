@@ -25,9 +25,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final Logger LOGGER = LoggerFactory.getLogger(getClass());
-
     private final UserRepository userRepository;
-
     private final BookingRepository bookingRepository;
 
     @Autowired

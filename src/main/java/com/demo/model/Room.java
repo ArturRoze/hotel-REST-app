@@ -13,17 +13,12 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private Integer number;
-
     @Enumerated(EnumType.STRING)
     private Category category;
-
     private Double price;
-
     @Column(name = "hotel_id")
     private Long hotelId;
-
     @OneToMany(mappedBy = "roomId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Booking> bookings = new ArrayList<>();
 

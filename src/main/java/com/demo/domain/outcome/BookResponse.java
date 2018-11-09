@@ -19,22 +19,15 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 public class BookResponse {
 
     private Long userId;
-
     private Long roomId;
-
     private Long bookingId;
-
     private Double totalPrice;
-
     @Enumerated(EnumType.STRING)
     private Category category;
-
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     private Timestamp startDate;
-
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     private Timestamp endDate;
-
     private List<AdditionalOption> additionalOptions;
 
     public BookResponse() {
@@ -132,7 +125,6 @@ public class BookResponse {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(userId, roomId, bookingId, totalPrice, category, startDate, endDate, additionalOptions);
     }
 

@@ -32,11 +32,8 @@ import java.util.concurrent.TimeUnit;
 public class RoomServiceImpl implements RoomService {
 
     private final Logger LOGGER = LoggerFactory.getLogger(getClass());
-
     private final RoomRepository roomRepository;
-
     private final AdditionalOptionRepository additionalOptionRepository;
-
     private final BookingRepository bookingRepository;
 
     @Autowired

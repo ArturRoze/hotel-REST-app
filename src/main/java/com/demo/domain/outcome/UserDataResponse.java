@@ -12,11 +12,8 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 public class UserDataResponse {
 
     private Long userId;
-
     private String login;
-
     private String name;
-
     private String surname;
 
     public UserDataResponse() {
@@ -74,7 +71,6 @@ public class UserDataResponse {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(userId, login, name, surname);
     }
 

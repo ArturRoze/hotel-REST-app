@@ -9,11 +9,8 @@ public class AdditionalOption {
     @Id
     @GeneratedValue
     private Long id;
-
     private String name;
-
     private double price;
-
     @Column(name = "booking_id")
     private Long bookingId;
 

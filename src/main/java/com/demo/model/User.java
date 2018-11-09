@@ -11,13 +11,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String login;
-
     private String name;
-
     private String surname;
-
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Booking> bookings = new ArrayList<>();
 
@@ -84,7 +80,6 @@ public class User {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(id, login, name, surname, bookings);
     }
 

@@ -24,7 +24,6 @@ import java.util.List;
 public class HotelController {
 
     private final Logger LOGGER = LoggerFactory.getLogger(getClass());
-
     private final HotelService hotelService;
 
     @Autowired

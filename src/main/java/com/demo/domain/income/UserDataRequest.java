@@ -12,9 +12,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 public class UserDataRequest {
 
     private String name;
-
     private String login;
-
     private String surname;
 
     public UserDataRequest() {

@@ -11,9 +11,7 @@ public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-
     @OneToMany(mappedBy = "hotelId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Room> rooms = new ArrayList<>();
 
