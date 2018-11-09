@@ -5,8 +5,8 @@ Application has API, it allows you to work with the application using JSON
 **2.1**\
 **`POST`** **`http://localhost:8080/rooms/all`** returns list of available rooms for specified dates.\
 {
-	"startDate": "2018-03-25 12:00:10",
-	"endDate": "2018-03-26 13:00:00"
+	"startDate": "2018-11-25 12:00:10",
+	"endDate": "2018-11-26 13:00:00"
 }\
 **2.2**\
 **`GET`** **`http://localhost:8080/rooms/category?nameCategory=SINGLE`** returns rooms filtered by category.
@@ -23,8 +23,8 @@ Application has API, it allows you to work with the application using JSON
 {
 	"userId": 1,
 	"roomId": 4,
-	"startDate": "2018-03-28 12:00:10",
-	"endDate": "2018-03-30 13:00:00",
+	"startDate": "2018-11-28 12:00:10",
+	"endDate": "2018-11-30 13:00:00",
 	"additionalOptions": [{
 		"name": "breakfast"
 	}]
@@ -36,8 +36,8 @@ Application has API, it allows you to work with the application using JSON
     "bookingId": 8,
     "totalPrice": 120,
     "category": "SINGLE",
-    "startDate": "2018-03-28 12:00:10",
-    "endDate": "2018-03-30 01:00:00",
+    "startDate": "2018-11-28 12:00:10",
+    "endDate": "2018-11-30 01:00:00",
     "additionalOptions": [
         {
             "id": 3,
